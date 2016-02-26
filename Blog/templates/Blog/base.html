@@ -1,0 +1,37 @@
+<html>
+<head>
+    {% load staticfiles %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> {{PageTitle}}</title>
+    <link type="text/css" rel="stylesheet" href="{%static 'css/common.css' %}">
+
+    <!--Test area now -->
+    <!--link rel="stylesheet" type="text/css" href="css/style.css" /-->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/image_slide.js' %}"></script>
+    <!--Test area closed -->
+    <!--From fest -->
+    <link rel="stylesheet" type="text/css" href= "{% static 'css/Feststyle.css' %}" /-->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/jquery.lavalamp.min.js' %}" ></script>
+    <script src="{% static 'js/image_fade.js' %}"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#lava_menu").lavaLamp({
+            fx: "backout",
+            speed: 700
+        });
+    });
+    </script>
+
+    <!--Fest from ended -->
+</head>
+<body class="Body" align="center">
+
+{% block content %} {% endblock content %}
+
+<div class="Box Footer" align="center">
+    Copyright &copy; 2015; Air Corporation
+</div>
+</body>
+</html>

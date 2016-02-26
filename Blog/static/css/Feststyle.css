@@ -1,0 +1,102 @@
+
+/* tell the browser to render HTML 5 elements as block */
+article, aside, figure, footer, header, hgroup, nav, section { 
+  display:block;
+}
+
+
+a, a:hover { 
+  outline: none;
+  color: #6648B0;
+  text-decoration: underline;
+}
+
+a:hover { 
+  text-decoration: none;
+  color: #2F1258;
+}
+
+ul { 
+  margin: 2px 0 22px 17px;
+}
+
+ul li { 
+  font: normal 1.3em "News Cycle", arial, sans-serif;
+  list-style-type: circle;
+  margin: 0 0 0 0; 
+  padding: 0 0 4px 5px;
+}
+
+#main, header, #logo, nav, #site_content, footer, .slideshow, #top_container { 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+#top_container
+{  background: green;
+   background: -moz-linear-gradient(#68B8D8, #2F1258);
+   background: -o-linear-gradient(#68B8D8, #2F1258);
+   background: -webkit-linear-gradient(#68B8D8, #2F1258);
+   padding-bottom: 40px;}
+
+header { 
+  width: 980px;
+  height: 90px;
+}
+
+nav { 
+  height: 40px;
+  width: 750px;
+  margin: 1px auto 0 auto;
+  float: right;
+  padding: 35px 0 20px 0;
+} 
+
+/* from here: http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers */
+.lavaLampWithImage {
+  position: relative;
+  height: 35px;
+  padding: 0 5px 15px 0;
+  margin: 35px 0 0 0;
+  overflow: hidden;
+  float: right;
+}
+
+.lavaLampWithImage li {
+  float: left;
+  list-style: none;
+  max-width: auto
+}
+
+.lavaLampWithImage li.back {
+  background: #2F1258;
+  height: 30px;
+  margin-top: 8px;
+  z-index: 8;
+  position: absolute;
+  border-radius: 7px 7px 7px 7px;
+  -moz-border-radius: 7px 7px 7px 7px;
+  -webkit-border: 7px 7px 7px 7px; 
+}
+
+.lavaLampWithImage li a {
+  font: normal 100% 'News Cycle', sans-serif;
+  text-shadow: none;
+  text-decoration: none;
+  color: #FFF;
+  outline: none;
+  text-align: center;
+  letter-spacing: 0;
+  z-index: 10;
+  display: block;
+  float: left;
+  line-height: 35px;
+  padding: 5px 0 5px 0;
+  position: relative;
+  overflow: hidden;
+  margin: auto 16px;    
+}
+
+.lavaLampWithImage li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
+  border: none;
+}
