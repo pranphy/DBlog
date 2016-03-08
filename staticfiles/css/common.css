@@ -1,0 +1,243 @@
+.Body
+{
+	background: #C6C6C6;
+	float: center;
+	font-size: 20;
+}
+.ContentArea
+{
+	width: 920px;
+	overflow: auto;
+	float:center;
+}
+
+.Banner
+{
+	height:120px;
+	background: green;
+	font-family: Monaco;
+	display: block;
+	float: top;
+	valign: middle;
+	font-color: white;
+	position: relative;
+	border-radius: 10px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+}
+.Box /*Cut khako chha*/
+{
+	padding: 5px;
+	spacing: 5px;
+	background: white;
+	align: center;
+	valign: middle;
+	clear: left right top bottom;
+	box-shadow: 0px 2px 4px 1px #000000;
+	font-family: Lora;
+	float: auto;
+}
+
+.Footer
+{
+	background: green;
+	width: 100%;
+	border-radius: 10px;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+}
+
+.Slogan
+{
+	font-family: Sawasdee;
+	font-size: 45;
+}
+.ToolBarRibbon
+{
+	float:center;
+	background: orange;
+	font-family: Monaco;
+	text-align:center;
+	font-size: 10;
+	position: relative;
+	border-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 0px;
+}
+
+.BannerImage
+{
+	float: right;
+}
+
+.BannerText
+{
+	float: left;
+	font-size: 50;
+}
+
+.ToolBarLink
+{
+	float: left;
+	padding: 2px;
+	margin:0px;
+		margin-top:0px;
+		margin-bottom: 5px;
+	width: 129px;	
+	height: 100%;
+	font-size: 20;
+}
+
+.ToolBarLink:hover
+{
+	background: #E9631C;
+}
+.ToolBarLink a
+{
+	color: black;
+}
+
+
+.MainArea
+{
+	width: 69%;
+	float:left;
+	font-family: Lora;
+}
+
+.Sidebar
+{
+	float: right;
+	width: 30%;
+}
+
+
+.BattaContent
+{
+	background: white;
+	text-align:justify;
+	font-size: 15;
+}
+
+.NewsContent
+{
+	text-align: justify;
+	background: white;
+	font-size: 15;
+}
+
+.Batta
+{
+	padding: 5px;
+	margin: 2px;
+	/*background: white;*/
+	clear: left right top bottom;
+	box-shadow: 0px 2px 4px 1px #939393;
+	font-family: Lora;
+	background: white;
+}
+
+.News
+{
+	padding: 5px;
+	margin: 2px;
+	/*background: white;*/
+	clear: left right top bottom;
+
+	font-family: Lora;
+	background: white;
+}
+
+.Raise
+{
+    box-shadow: 0px 2px 4px #939393;
+}
+
+
+.BattaTitle
+{
+	background: #DDDDDD;
+	font-weight: bold;
+}
+
+
+.NewsHeader
+{
+	font-size: 25;
+	background: #DDDDDD;
+	font-weight: bold;
+}
+
+
+
+
+.NewsSpacer
+{
+	height: 1px;
+}
+
+
+.Slides{
+	width: 60%;
+	float: left;
+}
+
+.SlidesRemain{
+	width: 15%;
+	float: right;
+}
+
+/*Slideshow Related*/
+.slideshow {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;}
+  
+/* styling for the slideshow on the homepage */
+ul.slideshow {
+  list-style: none;
+  /*width: 680px;
+  height: 400px;*/
+  margin: 0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;}
+  
+ul.slideshow li {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  right: 0;}
+ 
+ul.slideshow li.show {
+  z-index: 500;}
+ 
+ul img {
+  border: none;}
+ 
+#slideshow-caption {
+  /*width: 680px;*/
+  /*height:10px;*/
+  font-size: 15;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 500;}
+ 
+#slideshow-caption .slideshow-caption-container {
+  padding: 10px 25px 10px 25px; 
+  height: 30px;
+  background: transparent url(../Images/transparent.png) repeat;  
+  z-index: 100;}
+ 
+#slideshow-caption p {
+  padding: 0;
+  font: normal arial, sans-serif;
+  color: #FFF;}
+ 
