@@ -3,8 +3,6 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-
-# Create your models here.
 class News(models.Model):
     Title = models.CharField(max_length=300)
     Date = models.DateTimeField('Date Posted')
@@ -20,16 +18,17 @@ class BlogPost(models.Model):
     PostDate = models.DateTimeField('PostDate')
     PublishDate = models.DateTimeField('PublishDate')
     Likes = models.PositiveSmallIntegerField()
+    Contents = models.TextField();
     Slug = models.SlugField()
 
     
     def __str__(self):
         return self.Title
 
+class NavigationItems(models.Model):
+    DisplayName = models.CharField(max_length=50)
+    GlyphIconClass = models.CharField(max_length=20)
+    Link = models.CharField(max_length=50)
 
-class Tags(models.Model):
-    Name = models.CharField(max_length=50)
-
-
-class Category(models.Model):
-    Category = models.CharField(max_length=50)
+    def __str__(self):
+        return self.DisplayName
