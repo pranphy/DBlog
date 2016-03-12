@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
-    <title>Dashboard | Dashboard</title>
+    <title>{% block PageTitle%}Prakash | miles to go before I sleep{% endblock %}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/icons/favicon-72x72.png' %}">
     <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/icons/favicon-114x114.png' %}">
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet"  href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet"  href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
     <link type="text/css" rel="stylesheet" href ="{% static 'css/jquery-ui-1.10.4.custom.min.css' %}">
     <link type="text/css" rel="stylesheet" href ="{% static 'css/font-awesome.min.css' %}">
     <link type="text/css" rel="stylesheet" href ="{% static 'css/bootstrap.min.css' %}">
@@ -27,9 +27,11 @@
 </head>
 <body>
     <div>
-    {% include "Blog/Decorator.html" %}
-    {% include "Blog/ChatForm.html" %}
-    {% block BodyContents %}    {%endblock BodyContents %}
+        {% include "Blog/Decorator.html" %}
+        {% include "Blog/ChatForm.html" %}
+        {% block BodyContents %}
+            <!--Body Contents from the base file -->
+        {% endblock BodyContents %}
     </div>
     <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
     <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
@@ -81,8 +83,7 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', 'UA-145464-12', 'auto');
         ga('send', 'pageview');
+    </script>
 
-
-</script>
 </body>
 </html>
