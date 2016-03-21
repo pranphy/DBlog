@@ -1,0 +1,35 @@
+{%load staticfiles %}
+{% block SideBarMenu %}
+<!--BEGIN SIDEBAR MENU-->
+<nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+        data-position="right" class="navbar-default navbar-static-side">
+    <div class="sidebar-collapse menu-scroll">
+        <ul id="side-menu" class="nav">
+            <div class="clearfix"></div>
+            <li class="active">
+                <a href="dashboard.html">
+                    <i class="fa fa-tachometer fa-fw"><div class="icon-bg bg-orange"></div></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="Layout.html">
+                    <i class="fa fa-desktop fa-fw">
+                        <div class="icon-bg bg-pink"></div>
+                    </i>
+                    <span class="menu-title">Layouts</span>
+                </a>
+            </li>
+            {%for Item in NavItems %} 
+            <li>
+                <a href="{{Item.Link}}">
+                    <i class="fa fa-send-o fa-fw"><div class="icon-bg bg-green"></div></i>
+                    <span class="menu-title">{{Item.DisplayName}}</span>
+                </a>
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+</nav>
+<!--END SIDEBAR MENU-->
+{% endblock SideBarMenu %}

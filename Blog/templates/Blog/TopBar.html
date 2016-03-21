@@ -1,23 +1,5 @@
-{% load staticfiles %}
-{% block Decorator %}
-
-<!--BEGIN THEME SETTING-->
-<div id="theme-setting">
-    <a href="#" data-toggle="dropdown" data-step="1" data-intro="&lt;b&gt;Many styles&lt;/b&gt; and &lt;b&gt;colors&lt;/b&gt; be created for you. Let choose one and enjoy it!"
-        data-position="left" class="btn-theme-setting"><i class="fa fa-cog"></i>
-    </a>
-    <div class="content-theme-setting">
-        <select id="list-style" class="form-control">
-            <option value="style1">Flat Squared style</option>
-            <option value="style2">Flat Rounded style</option>
-            <option value="style3" selected="selected">Flat Border style is this</option>
-        </select>
-    </div>
-</div>
-<!--END THEME SETTING-->
-<!--BEGIN BACK TO TOP-->
-<a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
-<!--END BACK TO TOP-->
+{%load staticfiles %}
+{% block TopBar %}
 <!--BEGIN TOPBAR-->
 <div id="header-topbar-option-demo" class="page-header-topbar">
     <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
@@ -35,9 +17,7 @@
             </a>
         </div>
         <div class="topbar-main">
-            <a id="menu-toggle" href="#" class="hidden-xs">
-                <i class="fa fa-bars"></i>
-            </a>
+            <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
             <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
                 <div class="input-icon right text-white">
                     <a href="#"><i class="fa fa-search"></i></a>
@@ -108,37 +88,4 @@
     <!--END MODAL CONFIG PORTLET-->
 </div>
 <!--END TOPBAR-->
-<div id="wrapper">
-<!--BEGIN SIDEBAR MENU-->
-<nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
-        data-position="right" class="navbar-default navbar-static-side">
-    <div class="sidebar-collapse menu-scroll">
-        <ul id="side-menu" class="nav">
-            <div class="clearfix"></div>
-            <li class="active">
-                <a href="dashboard.html">
-                    <i class="fa fa-tachometer fa-fw"><div class="icon-bg bg-orange"></div></i>
-                    <span class="menu-title">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="Layout.html">
-                    <i class="fa fa-desktop fa-fw">
-                        <div class="icon-bg bg-pink"></div>
-                    </i>
-                    <span class="menu-title">Layouts</span>
-                </a>
-            </li>
-            {%for Item in NavItems %} 
-            <li>
-                <a href="{{Item.Link}}">
-                    <i class="fa fa-send-o fa-fw"><div class="icon-bg bg-green"></div></i>
-                    <span class="menu-title">{{Item.DisplayName}}</span>
-                </a>
-            </li>
-            {%endfor%}
-        </ul>
-    </div>
-</nav>
-<!--END SIDEBAR MENU-->
-{% endblock Decorator %}
+{% endblock TopBar %}

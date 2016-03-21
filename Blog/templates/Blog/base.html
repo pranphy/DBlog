@@ -27,11 +27,22 @@
 </head>
 <body>
     <div>
-        {% include "Blog/Decorator.html" %}
-        {% include "Blog/ChatForm.html" %}
-        {% block BodyContents %}
-            <!--Body Contents from the base file -->
-        {% endblock BodyContents %}
+        {%include "Blog/ThemeSetting.html" %}
+        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+        {% include "Blog/TopBar.html" %}
+        <!-- BEGIN WRAPPER -->
+       <div id="wrapper">
+           {% include "Blog/SideBarMenu.html" %}
+           {% include "Blog/ChatForm.html" %}
+           <!-- BEGIN PAGE WRAPPER -->
+            <div id="page-wrapper">
+                {% include "Blog/BreadCrumb.html" %}
+                {% block BodyContents %}
+                {% endblock BodyContents %}
+            </div>
+            <!-- END PAGE WRAPPER -->
+       </div>
+       <!--END WRAPPER-->  
     </div>
     <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
     <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
@@ -84,6 +95,5 @@
         ga('create', 'UA-145464-12', 'auto');
         ga('send', 'pageview');
     </script>
-
 </body>
 </html>

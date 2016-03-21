@@ -1,70 +1,51 @@
 {% extends "Blog/base.html" %}
 {% load staticfiles %}
 {% block BodyContents %}
-<!-- BEGIN PAGE WRAPPER -->
-<div id="page-wrapper">
-    <!--BEGIN TITLE & BREADCRUMB PAGE-->
-    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-        <div class="page-header pull-left">
-            <div class="page-title">Dashboard</div>
-        </div>
-        <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-            <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-            <li class="active">Dashboard</li>
-        </ol>
-        <div class="clearfix"></div>
-    </div>
-    <!--END TITLE & BREADCRUMB PAGE-->
-    <!--BEGIN CONTENT-->
-    <div class="page-content">
-        <div id="tab-general">
-             <div class="row mbl">
-                <div class="col-lg-8">
-                    <div class="panel">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2 class="mbs">Network Performance</h2>
-                                    <p class="help-block">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
-                                </div>
-                                {%if AllBlogPosts %}
-                                {% for Blog in AllBlogPosts %}
-                                <div class="col-md-12">
-                                    <h2 class="mbs">{{Blog.Title}}</h2>
-                                    <p class="help-block">{{Blog.Contents}}</p>
-                                </div>
-                                {% endfor %}
-                                {%endif%}
-                             </div>
-                        </div>
+<!--BEGIN CONTENT-->
+<div class="page-content">
+    <div id="tab-general">
+         <div class="row mbl">
+            <div class="col-lg-8">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="mbs">Network Performance</h2>
+                                <p class="help-block">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
+                            </div>
+                            {%if AllBlogPosts %}
+                            {% for Blog in AllBlogPosts %}
+                            <div class="col-md-12">
+                                <h2 class="mbs">{{Blog.Title}}</h2>
+                                <p class="help-block">{{Blog.Contents}}</p>
+                            </div>
+                            {% endfor %}
+                            {%endif%}
+                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="panel">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2 class="mbs">Network Performance</h2>
-                                    <p class="help-block">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
-                                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="mbs">Network Performance</h2>
+                                <p class="help-block">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
                             </div>
                         </div>
                     </div>
                 </div>
-             </div>
-        </div>
+            </div>
+         </div>
     </div>
-    <!--END CONTENT -->
-    <!-- BEGIN FOOTER -->
-    <div id="footer">
-        <div class="copyright">
-            <a href="http://pgautam.com.np">2016 © The Delta Finders, all right reserved.</a>
-        </div>
-    </div> 
-    <!--END FOOTER-->
 </div>
-<!-- END PAGE WRAPPER-->
-</div>
-<!-- END WRAPPER -->
+<!--END CONTENT -->
+<!-- BEGIN FOOTER -->
+<div id="footer">
+    <div class="copyright">
+        <a href="http://pgautam.com.np">2016 © The Delta Finders, all right reserved.</a>
+    </div>
+</div> 
+<!--END FOOTER-->
 {%endblock BodyContents %} 
