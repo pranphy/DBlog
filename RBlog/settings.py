@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_wysiwyg',
     'Blog.apps.BlogConfig', #one has to register apps here
 ]
 
@@ -130,5 +131,4 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR,'static'),
-        os.path.join(BASE_DIR,'static/css/minimal'),
         )

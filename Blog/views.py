@@ -13,8 +13,10 @@ def index(request):
     NavItems = NavigationItems.objects.all();
     template = loader.get_template('Blog/index.html')
     AllBlogPosts = BlogPost.objects.all(); 
+    Repeat = [1,2,3]
 
     context   = {
+        'Repeat' : Repeat,
         'NewsGroup' : NewsGroup,
         'NavItems'  : NavItems,
         'AllBlogPosts': AllBlogPosts,

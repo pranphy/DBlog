@@ -1,51 +1,52 @@
-{% extends "Blog/base.html" %}
-{% load staticfiles %}
-{% block BodyContents %}
-<!--BEGIN CONTENT-->
-<div class="page-content">
-    <div id="tab-general">
-         <div class="row mbl">
-            <div class="col-lg-8">
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2 class="mbs">Network Performance</h2>
-                                <p class="help-block">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
-                            </div>
-                            {%if AllBlogPosts %}
-                            {% for Blog in AllBlogPosts %}
-                            <div class="col-md-12">
-                                <h2 class="mbs">{{Blog.Title}}</h2>
-                                <p class="help-block">{{Blog.Contents}}</p>
-                            </div>
-                            {% endfor %}
-                            {%endif%}
-                         </div>
-                    </div>
-                </div>
+{%extends "Blog/base.html" %}
+{%load staticfiles %}
+{%block bodycontent %}
+
+{%block full-card %}
+<div class="container">
+{% for n in Repeat %}
+<div class="row">
+    <div class="col l12 s12 m12">
+      <div class="card ">
+        <div class="card-content black-text">
+          <div class="row">
+              <div class="col s7 m8 l10"><span class="card-title teal-text text-darken-3" style="font-size: 3em">Are events random</span></div>
+              <div class="col s5 m4  l2"><span class="blue-text text-darken-2" style="text-align: right;">Jan 21, 2015</span></div>
             </div>
-            <div class="col-lg-4">
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2 class="mbs">Network Performance</h2>
-                                <p class="help-block">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="divider"></div>
+            <div class="content" style="text-align: justify; font-size: 1.2em">
+            <p>I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively.
+                  यही हो हाम्रो लोरेम इप्सम कुन चाहिँको हो यो डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए। 
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+                  यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+          </p>
+          </div>
+          <div class="divider"></div>
+          <br/>
+          <div class="chip">
+                <img src="{%static 'images/capital-t.png'%}" alt="Contact Person">
+                Tags
             </div>
-         </div>
+            <a href="#"><div class="chip blue-text text-lighten-1">Science</div></a>
+            <a href="#"><div class="chip blue-text text-lighten-1">Math</div></a>
+            <a href="#"><div class="chip blue-text text-lighten-1">Physics</div></a>
+        </div>
+        
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
     </div>
-</div>
-<!--END CONTENT -->
-<!-- BEGIN FOOTER -->
-<div id="footer">
-    <div class="copyright">
-        <a href="http://pgautam.com.np">2016 © The Delta Finders, all right reserved.</a>
-    </div>
-</div> 
-<!--END FOOTER-->
-{%endblock BodyContents %} 
+  </div>
+  {% endfor %}
+  </div>
+{%endblock full-card%}
+
+{%endblock bodycontent %}
