@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$',include('Blog.urls')),
-    url(r'^DataGrid.html$',include('Blog.urls')),
+    url(r'^details/',include('Blog.urls')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 

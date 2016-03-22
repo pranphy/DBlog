@@ -2,28 +2,31 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.utils import timezone
-from .models import News
-from .models import NavigationItems
-from .models import BlogPost
+
 import datetime
+
+from .models import Tag 
+from .models import BlogPost
+from .models import Comment 
 
 
 def index(request):
-    NewsGroup = News.objects.order_by("-Date")
-    NavItems = NavigationItems.objects.all();
+    allposts = BlogPost.objects.all()
     template = loader.get_template('Blog/index.html')
-    AllBlogPosts = BlogPost.objects.all(); 
-    Repeat = [1,2,3]
+    Repeat = [1,2]
 
     context   = {
         'Repeat' : Repeat,
-        'NewsGroup' : NewsGroup,
-        'NavItems'  : NavItems,
-        'AllBlogPosts': AllBlogPosts,
+        'allposts' : allposts,
     }
     return HttpResponse(template.render(context,request))
 
-def dataGrid(request):
-    template = loader.get_template('Blog/DataGrid.html');
-    context = {}
+def detail(request,slug):
+    currentpost = BlogPost.objects.get(id=slug) 
+    template = loader.get_template('Blog/details.html')
+
+    context = {
+        'post': currentpost
+    }
+
     return HttpResponse(template.render(context,request))
