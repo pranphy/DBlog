@@ -1,37 +1,30 @@
-<html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    {% load staticfiles %}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{%block title%} And miles to go before I sleep. {% endblock title %}</title>
-    <link type="text/css" rel="stylesheet" href="{% static 'css/common.css' %}">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{%block title %}Imagination | Miles to go before I sleep{%endblock title%}</title>
+  <link rel="shortcut icon" type="image/png" href="{%static 'images/favicon.ico'%}">
 
-    <!--Test area now -->
-    <!--link rel="stylesheet" type="text/css" href="css/style.css" /-->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/image_slide.js' %}"></script>
-    <!--Test area closed -->
-    <!--From fest -->
-    <link rel="stylesheet" type="text/css" href= "{% static 'css/Feststyle.css' %}" /-->
-    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'js/jquery.lavalamp.min.js' %}" ></script>
-    <script src="{% static 'js/image_fade.js' %}"></script>
-    <script type="text/javascript">
-    $(function() {
-        $("#lava_menu").lavaLamp({
-            fx: "backout",
-            speed: 700
-        });
-    });
-    </script>
-
-    <!--Fest from ended -->
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{%static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{%static 'css/style.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body class="Body" align="center">
+<body>
+    {%include "Blog/navbar.html" %}
+ 
+    {%block bodycontent%} {% endblock bodycontent %}
 
-{% block content %} {% endblock content %}
+    {%include "Blog/footer.html" %}
+    {#%include "Blog/slide-nav.html"%#}
 
-<div class="Box Footer" align="center">
-    Copyright &copy; 2015; Air Corporation
-</div>
-</body>
+
+  <!--  Scripts-->
+  <script src="{%static 'js/jquery-2.1.4.min.js'%}"></script>
+  <script src="{%static 'js/materialize.js' %}"></script>
+  <script src="{%static 'js/init.js'%}"></script>
+
+  </body>
 </html>

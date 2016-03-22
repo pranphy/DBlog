@@ -1,41 +1,101 @@
-{% extends "Blog/base.html" %}
-{% block content %}
-<div class="Outermost" align="center">
-    {% include "Blog/toolbar.html" %}
-    <div class="ContentArea">
-        <span class="MainArea">
-            {% if NewsGroup %}
-            {%load BlogExtras %}
-            {% for News in NewsGroup %}
-            <div class="Batta News">
-                <div class="NewsHeader">{{News.Title}} </div>
-                <div class="NewsContent">
-                    {{News.Place}},{{News.Date}}<p>
-                    {{News.Source}} <p>
-                    {{News.NewsText|linebreaksbr }}...<a href="#">Read All .. </a>
-                </div>
-             </div>
-            &nbsp;
-            <div class="NewsSpacer"> </div>
-            {% endfor %}
-            {% endif %}
-        </span>
-        <!-- Now starts the sidebar contents-->
-        <span class="Sidebar SideBarWidth">
-            <div class="Batta">
-                <div class="BattaTitle">छेवैको शीर्षक</div>
-                <div class="BattaContent">
-                    आन्दोलन दबाउन चैत १२ गते बिहान २ सय ५० जनाको सैनिक टोली विराटनगर पुग्यो। लगत्तै व्यापक धरपकड सुरु भयो। पहिले तारिणीप्रसाद कोइराला समातिए। त्यसपछि गिरिजा, गेहेन्द्रहरि शर्मा (विकु), मनमोहन अधिकारी र युवराज अधिकारी पक्राउ परे। अनि समातिए, विश्वेश्वरप्रसाद कोइराला। सशस्त्र सिपाहीको डफ्फाले यी छजनालाई विराटनगरबाट फुस्रे लिएर गयो। त्यहाँबाट दिनभरिको बाटो धनकुटा। र, त्यहाँबाट पैदलै पैदल काठमाडौं। त्यो पनि मधेसको बाटो होइन, पहाडै पहाड। तीन साताभन्दा बढी लगाएर बन्दीका रूपमा विराटनगरदेखि पहाडी बाटो काठमाडौं आइपुग्दाको क्षण बिपी कोइरालाले आफ्नो आत्मवृत्तान्तमा वर्णन गरेका छन्। बिपी लगायतलाई काठमाडौं ल्याइएको त्यही बाटो भदौ १ देखि २४ गतेसम्म फेरि पैदलयात्रा गरिने भएको छ।		</div>
+{%extends "Blog/base.html" %}
+{%load staticfiles %}
+{%block bodycontent %}
+
+{%block full-card %}
+<div class="container">
+{% for post in allposts %}
+<div class="row">
+    <div class="col l12 s12 m12">
+      <div class="card ">
+        <div class="card-content black-text">
+          <div class="row">
+              <div class="col s7 m8 l10">
+                  <span class="card-title teal-text text-darken-3" style="font-size: 2em">
+                      {{post.title}} 
+                  </span>
+              </div>
+              <div class="col s5 m4  l2">
+                  <span class="blue-text text-darken-2" style="text-align: right;">{{post.createdate}}</span>
+              </div>
             </div>
-            &nbsp;
-            <div class="Batta">
-                <div class="BattaTitle">अर्को  शीर्षक</div>
-                <div class="BattaContent">
-                    आन्दोलन दबाउन चैत १२ गते बिहान २ सय ५० जनाको सैनिक टोली विराटनगर पुग्यो। लगत्तै व्यापक धरपकड सुरु भयो। पहिले तारिणीप्रसाद कोइराला समातिए। त्यसपछि गिरिजा, गेहेन्द्रहरि शर्मा (विकु), मनमोहन अधिकारी र युवराज अधिकारी पक्राउ परे। अनि समातिए, विश्वेश्वरप्रसाद कोइराला। सशस्त्र सिपाहीको डफ्फाले यी छजनालाई विराटनगरबाट फुस्रे लिएर गयो। त्यहाँबाट दिनभरिको बाटो धनकुटा। र, त्यहाँबाट पैदलै पैदल काठमाडौं। त्यो पनि मधेसको बाटो होइन, पहाडै पहाड। तीन साताभन्दा बढी लगाएर बन्दीका रूपमा विराटनगरदेखि पहाडी बाटो काठमाडौं आइपुग्दाको क्षण बिपी कोइरालाले आफ्नो आत्मवृत्तान्तमा वर्णन गरेका छन्। बिपी लगायतलाई काठमाडौं ल्याइएको त्यही बाटो भदौ १ देखि २४ गतेसम्म फेरि पैदलयात्रा गरिने भएको छ।		</div>
+            <div class="divider"></div>
+            <div class="content" style="text-align: justify; font-size: 1.2em">
+            <p>
+                {{post.body|linebreaksbr}} 
+            </p>
+          </div>
+          <div class="divider"></div>
+          <br/>
+          <div class="chip">
+                <img src="{%static 'images/capital-t.png'%}" alt="Tags">
+                Tags
+          </div><!--chip-->
+          {%for tag in post.tags.all %}
+          <a href="#"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
+          {%endfor %}
+        </div>
+        
+        <div class="card-action">
+            <a href="details/{{post.id}}">read more</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+</div><!--row-->
+{% endfor %}
+
+{% for n in Repeat %}
+<div class="row">
+    <div class="col l12 s12 m12">
+      <div class="card ">
+        <div class="card-content black-text">
+          <div class="row">
+              <div class="col s7 m8 l10">
+                  <span class="card-title teal-text text-darken-3" style="font-size: 2em">
+                      Are events random
+                  </span>
+              </div>
+              <div class="col s5 m4  l2">
+                  <span class="blue-text text-darken-2" style="text-align: right;">Jan 21, 2015</span>
+              </div>
             </div>
-            &nbsp;
-        </span>
-        <!-- Sidebar contents end here -->
-    </div><!--ContentArea div close-->
-</div><!--Outermost Div Close -->
-{% endblock content %}
+            <div class="divider"></div>
+            <div class="content" style="text-align: justify; font-size: 1.2em">
+            <p>I am a very simple card. I am good at containing small bits of information.
+               I am convenient because I require little markup to use effectively.
+               यही हो हाम्रो लोरेम इप्सम कुन चाहिँको हो यो डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए। 
+               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+               <p>
+               <code>for(i = 0; i< 5; i++)</code>
+               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर हामी यहाँ पनि छौँ।  बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही कुराको घर हौँ। हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+               यही हो हाम्रो लोरेम हामी पनि छौँ यहाँ इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
+          </p>
+          </div>
+          <div class="divider"></div>
+          <br/>
+          <div class="chip">
+                <img src="{%static 'images/capital-t.png'%}" alt="Tags">
+                Tags
+          </div><!--chip-->
+            <a href="#"><div class="chip blue-text text-lighten-1">Science</div></a>
+            <a href="#"><div class="chip blue-text text-lighten-1">Math</div></a>
+            <a href="#"><div class="chip blue-text text-lighten-1">Physics</div></a>
+        </div>
+        
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+    </div>
+</div><!--row-->
+{% endfor %}
+</div><!--container-->
+{%endblock full-card%}
+
+{%endblock bodycontent %}

@@ -5,4 +5,5 @@ __pycache__
 */*/__pycache__
 *.o
 venv/
-db.sqlite3
+staticfiles/
+*.swp

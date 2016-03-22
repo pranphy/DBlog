@@ -3,33 +3,28 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-
-# Create your models here.
-class News(models.Model):
-    Title = models.CharField(max_length=300)
-    Date = models.DateTimeField('Date Posted')
-    Place = models.CharField(max_length=50)
-    Source = models.CharField(max_length=100)
-    NewsText = models.TextField()
+class Tag(models.Model):
+    word = models.CharField(max_length=100,unique=True)
 
     def __str__(self):
-        return self.Title
+        return self.word
 
 class BlogPost(models.Model):
-    Title = models.CharField(max_length=300)
-    PostDate = models.DateTimeField('PostDate')
-    PublishDate = models.DateTimeField('PublishDate')
-    Likes = models.PositiveSmallIntegerField()
-    Slug = models.SlugField()
+    title = models.CharField(max_length=200,unique=True)
+    body = models.TextField()
+    createdate = models.DateTimeField(auto_now_add=True)
+    updatedate = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField('Tag',blank=True)
+    slug = models.SlugField(max_length=200,unique=True)
 
-    
     def __str__(self):
-        return self.Title
+        return self.title
 
+class Comment(models.Model):
+    commenter = models.CharField(max_length=40)
+    comment = models.TextField()
+    postdate = models.DateTimeField(auto_now_add=True)
+    blogpost = models.ForeignKey('BlogPost')
 
-class Tags(models.Model):
-    Name = models.CharField(max_length=50)
-
-
-class Category(models.Model):
-    Category = models.CharField(max_length=50)
+    def __str__(self):
+        return self.commenter+ ' on '+ self.blogpost.title
