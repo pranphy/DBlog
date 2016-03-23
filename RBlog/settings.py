@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&%y@&9po+g-x--x&&od-^)*m%^fb3&lha%ndvoh$iw^d!&7hzv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
 ALLOWED_HOSTS = ['*']
 
@@ -62,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(SETTINGS_PATH, 'templates'),
-                 #os.path.join(SETTINGS_PATH, 'Blog/templates'),
+                 os.path.join(SETTINGS_PATH, 'Blog/templates/Blog'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
