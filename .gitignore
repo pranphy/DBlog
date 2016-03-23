@@ -6,4 +6,5 @@ __pycache__
 *.o
 venv/
 staticfiles/
+staticfiles/*
 *.swp
