@@ -10,6 +10,6 @@ def LowerIt(value):
 
 @register.filter
 @stringfilter
-def Shorten(value,length):
+def shorten(value,length):
     return value[0:length]
 
