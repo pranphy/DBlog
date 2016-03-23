@@ -21,8 +21,8 @@ def index(request):
     }
     return HttpResponse(template.render(context,request))
 
-def detail(request,slug):
-    currentpost = BlogPost.objects.get(id=slug) 
+def detail(request,pslug):
+    currentpost = BlogPost.objects.get(slug=pslug) 
     template = loader.get_template('Blog/details.html')
 
     context = {
@@ -30,3 +30,10 @@ def detail(request,slug):
     }
 
     return HttpResponse(template.render(context,request))
+
+def download(request):
+    template = loader.get_template('Blog/download.html')
+    context = {}
+    
+    return HttpResponse(template.render(context,request))
+

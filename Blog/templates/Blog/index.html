@@ -37,14 +37,14 @@
         </div>
         
         <div class="card-action">
-            <a href="details/{{post.id}}">read more</a>
+            <a href="{% url 'detail' post.slug %}">read more</a>
           <a href="#">This is a link</a>
         </div>
       </div>
     </div>
 </div><!--row-->
 {% endfor %}
-
+{% comment %}
 {% for n in Repeat %}
 <div class="row">
     <div class="col l12 s12 m12">
@@ -95,7 +95,9 @@
     </div>
 </div><!--row-->
 {% endfor %}
+{% endcomment %}
 </div><!--container-->
+
 {%endblock full-card%}
 
 {%endblock bodycontent %}
