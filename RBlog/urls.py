@@ -19,11 +19,12 @@ from django.contrib import admin
 #Adding the following two lines
 from django.conf import settings
 from django.conf.urls.static import static
-
+import Blog
 urlpatterns = [
     url(r'^$',include('Blog.urls')),
     url(r'^blog/',include('Blog.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^.+$',Blog.views.handler404),
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
 #Adding +static.... resolved the issue
