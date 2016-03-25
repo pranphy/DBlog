@@ -5,15 +5,15 @@
 <div class="container">
 <div class="row">
     <div class="col l12 s12 m12">
-      <div class="card ">
+      <div class="card">
         <div class="card-content black-text">
           <div class="row">
-              <div class="col s7 m8 l10">
+              <div class="col s12 m8 l10">
                   <span class="card-title teal-text text-darken-3" style="font-size: 2em">
                       {{post.title}}
                   </span>
               </div>
-              <div class="col s5 m4  l2">
+              <div class="col s12 m4  l2">
                   <span class="blue-text text-darken-2" style="text-align: right;">{{post.createdate}}</span>
               </div>
             </div>
@@ -40,5 +40,6 @@
       </div>
     </div>
 </div><!--row-->
+{% include "Blog/comment.html" %}
 </div><!--container -->
 {%endblock bodycontent %}
