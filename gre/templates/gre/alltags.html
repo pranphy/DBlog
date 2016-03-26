@@ -3,6 +3,7 @@
 {%block bodycontent %}
 
 <div class="container">
+{% for tag,vocabs in tagvocab.items %}
 <div class="row">
     <div class="col l12 s12 m12">
       <div class="card">
@@ -20,18 +21,20 @@
             <div class="divider"></div>
             <div class="content" style="text-align: justify; font-size: 1.2em">
 
-            {%for word in tagwords%}
-            <a href="{% url 'meaning' word%}">{{word}}</a>:{{word.meaning}}<br />
+            {%for vocab in vocabs.all %}
+            <a href="{% url 'meaning' vocab.word%}">{{vocab.word}}</a>:{{vocab.meaning}}<br />
             {% endfor %}
           </div>
           <div class="divider"></div>
           <br/>
+          <a href="{% url 'alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
           </div><!--chip-->
-          {%for tag in currentword.category.all %}
-          <a href="#"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
+          </a>
+          {%for ltag in word.category.all %}
+          <a href="#"><div class="chip blue-text text-lighten-1">{{ltag}}</div></a>
           {%endfor %}
         </div>
         <div class="card-action">
@@ -40,6 +43,7 @@
       </div>
     </div>
 </div><!--row-->
+{% endfor %}
 {% include "Blog/comment.html" %}
 </div><!--container -->
 {%endblock bodycontent %}
