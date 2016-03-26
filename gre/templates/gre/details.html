@@ -20,24 +20,30 @@
             <div class="divider"></div>
             <div class="content" style="text-align: justify; font-size: 1.2em">
             <p>
-            {{currentword.meaning}}  <br/>
-            {{currentword.sentence}} <br/>
-            See Also : <br/>
-            {% for see in currentword.seealso.all%}
-            <a href="{% url 'detail' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
-            {% endfor %}
-            <br/>
-            Synonym: <br/>
-            {% for see in currentword.synonym.all%}
-            <a href="{% url 'detail' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
-            {% endfor %}
-            <br/>
-            Antonym: <br/>
-            {% for see in currentword.antonym.all%}
-            <a href="{% url 'detail' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
-            {% endfor %}
-
-
+            <div class="purple-text text-lighten-1">{{currentword.meaning}}</div>  <br/>
+            <div class="black-text text-lighten-3"><i><blockquote>{{currentword.sentences}}</blockquote></i></div>  <br/>
+            <div style="font-size:0.8em">
+                {% if currentword.seealso %}
+                    See Also :
+                    {% for see in currentword.seealso.all %}
+                    <a href="{% url 'meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
+                    {% endfor %}
+                    <br/>
+                {% endif %}
+                {% if currentword.synonym %}
+                    Synonym:
+                    {% for see in currentword.synonym.all%}
+                    <a href="{% url 'meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
+                    {% endfor %}
+                    <br/>
+                {% endif %}
+                {% if currentword.antonym %}
+                    Antonym:
+                    {% for see in currentword.antonym.all%}
+                    <a href="{% url 'meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
+                    {% endfor %}
+                {% endif %}
+            </div>
             </p>
           </div>
           <div class="divider"></div>
@@ -47,7 +53,7 @@
                 Tags
           </div><!--chip-->
           {%for tag in currentword.category.all %}
-          <a href="#"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
+          <a href="{% url 'tag' tag %}"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
           {%endfor %}
         </div>
         

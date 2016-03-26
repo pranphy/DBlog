@@ -34,3 +34,13 @@ def detail(request,pword):
         'currentword': currentword
     }
     return HttpResponse(template.render(context,request))
+
+def tag(request,ptag):
+    tagids = get_list_or_404(Tag,tagname__contains=ptag)
+    tagwords = get_list_or_404(Vocab,category__in=tagids)
+    template = loader.get_template('gre/tags.html')
+    context = { 
+        'tagwords':tagwords,
+        'tag' : ptag
+    }
+    return HttpResponse(template.render(context,request))
