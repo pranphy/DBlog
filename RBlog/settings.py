@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Blog.apps.BlogConfig', #one has to register apps here
+    'gre.apps.GreConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -62,7 +63,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(SETTINGS_PATH, 'templates'),
-                 os.path.join(SETTINGS_PATH, 'Blog/templates/Blog'),
+                 os.path.join(SETTINGS_PATH, 'Blog'),
+                 os.path.join(SETTINGS_PATH, 'gre'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
