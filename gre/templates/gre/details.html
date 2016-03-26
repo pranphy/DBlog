@@ -21,7 +21,7 @@
             <div class="content" style="text-align: justify; font-size: 1.2em">
             <p>
             <div class="purple-text text-lighten-1">{{currentword.meaning}}</div>  <br/>
-            <div class="black-text text-lighten-3"><i><blockquote>{{currentword.sentences}}</blockquote></i></div>  <br/>
+            <div class="black-text text-lighten-3"><i><blockquote>{{currentword.sentences|linebreaksbr}}</blockquote></i></div>  <br/>
             <div style="font-size:0.8em">
                 {% if currentword.seealso %}
                     See Also :
