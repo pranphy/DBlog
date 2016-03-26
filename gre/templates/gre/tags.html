@@ -26,10 +26,12 @@
           </div>
           <div class="divider"></div>
           <br/>
+          <a href="{% url 'alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
           </div><!--chip-->
+          </a>
           {%for tag in currentword.category.all %}
           <a href="#"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
           {%endfor %}
