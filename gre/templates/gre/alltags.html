@@ -11,7 +11,7 @@
           <div class="row">
               <div class="col s12 m8 l10">
                   <span class="card-title teal-text text-darken-3" style="font-size: 2em:text-align:center;">
-                      {{tag}} 
+                      <a href="{% url 'tag' tag %}">{{tag}}</a>
                   </span>
               </div>
               <div class="col s12 m4  l2">
@@ -22,23 +22,24 @@
             <div class="content" style="text-align: justify; font-size: 1.2em">
 
             {%for vocab in vocabs.all %}
-            <a href="{% url 'meaning' vocab.word%}">{{vocab.word}}</a>:{{vocab.meaning}}<br />
+            <div class="row">
+                <div class="col s3 m3 l2 green-text text-darken-2"><a href="{% url 'meaning' vocab.word%}">{{vocab.word}}</a></div>
+                <div class="col s9 m9 l10">{{vocab.meaning}}</div>
+            </div>
             {% endfor %}
           </div>
           <div class="divider"></div>
           <br/>
-          <a href="{% url 'alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
           </div><!--chip-->
-          </a>
           {%for ltag in word.category.all %}
           <a href="#"><div class="chip blue-text text-lighten-1">{{ltag}}</div></a>
           {%endfor %}
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+          <a href="#">View All</a>
         </div>
       </div>
     </div>

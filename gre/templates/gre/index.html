@@ -2,7 +2,6 @@
 {%load staticfiles %}
 {%load BlogExtras %}
 {%block bodycontent %}
-
 {%block full-card %}
 <div class="container">
 {% for word in allword %}
@@ -11,12 +10,12 @@
       <div class="card ">
         <div class="card-content black-text">
           <div class="row">
-              <div class="col s7 m8 l10">
+              <div class="col s12 m8 l10">
                   <span class="card-title teal-text text-darken-3" style="font-size: 2em">
                       <a href="{% url 'meaning' word.word %}">{{word.word}}</a>
                   </span>
               </div>
-              <div class="col s5 m4  l2">
+              <div class="col s12 m4  l2">
                   <span class="blue-text text-darken-2" style="text-align: right;">{{word.createdate}}</span>
               </div>
             </div>
@@ -24,15 +23,16 @@
             <div class="content" style="text-align: justify; font-size: 1.2em">
             <p>
                 {{word.meaning}}<br/>
-                {{word.sentence}}<br/>
             </p>
           </div>
           <div class="divider"></div>
           <br/>
+          <a href="{% url 'alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
           </div><!--chip-->
+          </a>
           {%for tag in word.category.all %}
           <a href="{% url 'tag' tag %}"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
           {%endfor %}
@@ -40,66 +40,11 @@
         
         <div class="card-action">
             <a href="{% url 'meaning' word.word %}">read more</a>
-          <a href="#">This is a link</a>
         </div>
       </div>
     </div>
 </div><!--row-->
 {% endfor %}
-{% comment %}
-{% for n in Repeat %}
-<div class="row">
-    <div class="col l12 s12 m12">
-      <div class="card ">
-        <div class="card-content black-text">
-          <div class="row">
-              <div class="col s7 m8 l10">
-                  <span class="card-title teal-text text-darken-3" style="font-size: 2em">
-                      Are events random
-                  </span>
-              </div>
-              <div class="col s5 m4  l2">
-                  <span class="blue-text text-darken-2" style="text-align: right;">Jan 21, 2015</span>
-              </div>
-            </div>
-            <div class="divider"></div>
-            <div class="content" style="text-align: justify; font-size: 1.2em">
-            <p>I am a very simple card. I am good at containing small bits of information.
-               I am convenient because I require little markup to use effectively.
-               यही हो हाम्रो लोरेम इप्सम कुन चाहिँको हो यो डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए। 
-               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-               <p>
-               <code>for(i = 0; i< 5; i++)</code>
-               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर हामी यहाँ पनि छौँ।  बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही कुराको घर हौँ। हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-               यही हो हाम्रो लोरेम हामी पनि छौँ यहाँ इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-               यही हो हाम्रो लोरेम इप्सम डलस सिट हामी त्यही सम्पत्ति खोजेर बसेका छौ जो हाम्हर पुर्खा खोज्दै थिए।
-          </p>
-          </div>
-          <div class="divider"></div>
-          <br/>
-          <div class="chip">
-                <img src="{%static 'images/capital-t.png'%}" alt="Tags">
-                Tags
-          </div><!--chip-->
-            <a href="#"><div class="chip blue-text text-lighten-1">Science</div></a>
-            <a href="#"><div class="chip blue-text text-lighten-1">Math</div></a>
-            <a href="#"><div class="chip blue-text text-lighten-1">Physics</div></a>
-        </div>
-        
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-</div><!--row-->
-{% endfor %}
-{% endcomment %}
 </div><!--container-->
-
 {%endblock full-card%}
-
 {%endblock bodycontent %}
