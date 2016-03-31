@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>{%block title %}Imagination | Miles to go before I sleep{%endblock title%}</title>
   <link rel="shortcut icon" type="image/png" href="{%static 'images/favicon.ico'%}">
-
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{%static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -14,17 +13,11 @@
 </head>
 <body>
     {%include "navbar.html" %}
- 
     {%block bodycontent%} {% endblock bodycontent %}
-
     {%include "footer.html" %}
-    {#%include "Blog/slide-nav.html"%#}
-
-
   <!--  Scripts-->
   <script src="{%static 'js/jquery-2.1.4.min.js'%}"></script>
   <script src="{%static 'js/materialize.js' %}"></script>
   <script src="{%static 'js/init.js'%}"></script>
-
   </body>
 </html>
