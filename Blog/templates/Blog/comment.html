@@ -1,34 +1,67 @@
-{%block oldcomments%}
-    <div class="row">
-        <div class="col s12">
-            <div class="card">
-            <div class="card-content">
-                <div>Rajan Says</div>
-                <div>I am glad about this letter brother</div>
-                <div class="divider"></div>
-                <div>Sajan Says</div>
-                <div>I am not at all convinced that this is the best thing to do anyway
-                    glad about this letter brother</div>
-                <div class="divider"></div>
-                <div>Mahantha Says</div>
-                <div> The idea is absolutely rubbish and we can't go any further with this.
-                    glad about this letter brother</div>
-                <div class="divider"></div>
-            </div>
-            </div>
+{%block postedcomments %}
+{%if comments %}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <ul class="collection">
+        {% for comment in comments %}
+           <li class="collection-item" style="padding-left: 10px;">
+             <span class="grey-text text-darken-1">
+                 <b>{{comment.commenter}}</b> on {{comment.postdate}}
+             </span>
+             <div class="grey lighten-3">
+                 <div class="text-flow"> <p>{{comment.comment}}</p> </div>
+             </div>
+           </li>
+        {%endfor %} 
+        </ul>
+      </div><!--Card content -->
+    </div><!--card-->
+  </div><!--col-->
+</div><!--row-->
+{%endif%}
+{%endblock postedcomments %}
+{%block commentform%}
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <div>
+        <span class="card-content teal-text text-darken-2" style="font-size:1.5em">Leave Comments</span>
         </div>
-     </div>
-{%endblock oldcomments%}
-{%block newcomment%}
-    <div class="row">
-        <div class="col s12">
-            <div class="card">
-            <div class="card-content">
-            <input type="text" placeholder="Enter Your First Name"/> <br/>
-            <input type="text" placeholder="Enter your last name"/> <br/>
-            <textarea type="text"/> </textarea><br/>
-            </div>
-            </div>
-        </div>
-     </div>
-{%endblock newcomment %}
+        {# auto generated form down #}
+        <form action="{% url 'detail' post.slug %}" method="post">
+           {% csrf_token %}
+           {{form.non_field_errors }}
+           <div class="row">
+             <div class="input-field col s6">
+               <i class="material-icons prefix">account_circle</i>
+               {{form.commenter}}
+               {{form.commenter.label_tag}}
+             </div>
+             <div class="input-field col s6">
+               <i class="material-icons prefix">email</i>
+               {{form.email}}
+               {{form.email.label_tag }}
+             </div>
+           </div>
+           <div class="row">
+           <div class="input-field col s12">
+             <i class="material-icons prefix">mode_edit</i>
+             {{form.comment}}
+             {{form.comment.label_tag}}
+           </div>
+          </div> 
+          <div class="center-align">
+          <button class="btn waves-effect waves-light teal" type="submit" name="submit">Submit
+              <i class="material-icons right">send</i>
+          </button>
+          </div>
+        </form> 
+        {# auto generated form up #}
+      </div><!--Card content -->
+    </div><!--card-->
+  </div><!--col-->
+</div><!--row-->
+{%endblock commentform%}

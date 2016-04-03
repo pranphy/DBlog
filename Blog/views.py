@@ -15,6 +15,8 @@ from .models import Tag
 from .models import BlogPost
 from .models import Comment 
 
+from .forms import CommentForm
+
 
 def index(request):
     allposts = BlogPost.objects.all()
@@ -29,9 +31,24 @@ def index(request):
 
 def detail(request,pslug):
     currentpost = get_object_or_404(BlogPost,slug=pslug) 
+    comments = Comment.objects.filter(blogpost=currentpost)
     template = loader.get_template('Blog/details.html')
+    if request.POST:
+        name = request.POST.get('commenter')
+        email = request.POST.get('email')
+        comment = request.POST.get('comment')
+        CommentObject = Comment(
+            commenter=name,
+            comment=comment,
+            blogpost=currentpost
+        )
+        CommentObject.save()
+
+    form = CommentForm()
     context = {
-        'post': currentpost
+        'post' : currentpost,
+        'form' : form,
+        'comments' : comments,
     }
     return HttpResponse(template.render(context,request))
 
