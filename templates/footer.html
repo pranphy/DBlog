@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {%block footer %}
 <footer class="page-footer teal darken-3">
     <div class="container">
@@ -11,24 +12,13 @@
              has been going
           </p>
         </div>
-        <!--
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        -->
-        <div class="col l6 s12">
+       <div class="col l6 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-              <li><a class="white-text" href="#!"><i class="material-icons left">person_pin</i>Github</a></li>
-              <li><a class="white-text" href="#!"><i class="material-icons left">person_pin</i>Google+</a></li>
-              <li><a class="white-text" href="#!"><i class="material-icons left">person_pin</i>Twitter</a></li>
-              <li><a class="white-text" href="#!"><i class="material-icons left">person_pin</i>Facebook</a></li>
+              <li><a class="white-text" href="http://github.com/pranphy/"><img src="{% static 'images/github-icon.png' %}" style="height:23px; width:23px" />Github</a></li>
+              <li><a class="white-text" href="http://plus.google.com/pranphy/"><i class="material-icons left">person_pin</i>Google+</a></li>
+              <li><a class="white-text" href="http://twitter.com/pranphy"><i class="material-icons left">person_pin</i>Twitter</a></li>
+              <li><a class="white-text" href="http://fb.com/pranphy"><img src="{% static 'images/facebook-icon.png' %}" style="height:23px; width:23px" />Facebook</a></li>
           </ul>
         </div>
       </div>

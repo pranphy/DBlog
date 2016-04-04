@@ -28,9 +28,9 @@ def index(request):
     }
     return HttpResponse(template.render(context,request))
 
-def detail(request,pword):
+def meaning(request,pword):
     currentword = get_object_or_404(Vocab,word = pword) 
-    template = loader.get_template('gre/details.html')
+    template = loader.get_template('gre/meaning.html')
     context = {
         'pword':pword,
         'currentword': currentword
