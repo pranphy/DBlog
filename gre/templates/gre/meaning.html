@@ -26,21 +26,21 @@
                 {% if currentword.seealso %}
                     See Also :
                     {% for see in currentword.seealso.all %}
-                    <a href="{% url 'meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'gre:meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
                     {% endfor %}
                     <br/>
                 {% endif %}
                 {% if currentword.synonym %}
                     Synonym:
                     {% for see in currentword.synonym.all%}
-                    <a href="{% url 'meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'gre:meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
                     {% endfor %}
                     <br/>
                 {% endif %}
                 {% if currentword.antonym %}
                     Antonym:
                     {% for see in currentword.antonym.all%}
-                    <a href="{% url 'meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'gre:meaning' see %}">{{see}}</a>&nbsp;&nbsp;&nbsp;
                     {% endfor %}
                 {% endif %}
             </div>
@@ -48,14 +48,14 @@
           </div>
           <div class="divider"></div>
           <br/>
-          <a href="{% url 'alltag' %}">
+          <a href="{% url 'gre:alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
           </div><!--chip-->
           </a>
           {%for tag in currentword.category.all %}
-          <a href="{% url 'tag' tag %}"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
+          <a href="{% url 'gre:tag' tag %}"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
           {%endfor %}
         </div>
         
@@ -65,6 +65,5 @@
       </div>
     </div>
 </div><!--row-->
-{% include "Blog/comment.html" %}
 </div><!--container -->
 {%endblock bodycontent %}

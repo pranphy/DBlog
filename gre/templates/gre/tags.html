@@ -22,14 +22,14 @@
 
             {%for word in tagwords%}
             <div class="row">
-                <div class="col s3 m3 l2"><a href="{% url 'meaning' word%}">{{word}}</a></div>
+                <div class="col s3 m3 l2"><a href="{% url 'gre:meaning' word%}">{{word}}</a></div>
                 <div class="col s9 m9 l10">{{word.meaning}}</div>
              </div>
             {% endfor %}
           </div>
           <div class="divider"></div>
           <br/>
-          <a href="{% url 'alltag' %}">
+          <a href="{% url 'gre:alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
@@ -45,6 +45,5 @@
       </div>
     </div>
 </div><!--row-->
-{% include "Blog/comment.html" %}
 </div><!--container -->
 {%endblock bodycontent %}

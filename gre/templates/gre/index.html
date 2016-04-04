@@ -12,7 +12,7 @@
           <div class="row">
               <div class="col s12 m8 l10">
                   <span class="card-title teal-text text-darken-3" style="font-size: 2em">
-                      <a href="{% url 'meaning' word.word %}">{{word.word}}</a>
+                      <a href="{% url 'gre:meaning' word.word %}">{{word.word}}</a>
                   </span>
               </div>
               <div class="col s12 m4  l2">
@@ -27,19 +27,19 @@
           </div>
           <div class="divider"></div>
           <br/>
-          <a href="{% url 'alltag' %}">
+          <a href="{% url 'gre:alltag' %}">
           <div class="chip">
                 <img src="{%static 'images/capital-t.png'%}" alt="Tags">
                 Tags
           </div><!--chip-->
           </a>
           {%for tag in word.category.all %}
-          <a href="{% url 'tag' tag %}"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
+          <a href="{% url 'gre:tag' tag %}"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
           {%endfor %}
         </div>
         
         <div class="card-action">
-            <a href="{% url 'meaning' word.word %}">read more</a>
+            <a href="{% url 'gre:meaning' word.word %}">read more</a>
         </div>
       </div>
     </div>
