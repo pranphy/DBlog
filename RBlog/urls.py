@@ -21,10 +21,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$',include('Blog.urls')),
-    url(r'^blog/',include('Blog.urls')),
-    url(r'^gre/',include('gre.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^blog/',include('Blog.urls', namespace='blog')),
+    url(r'^gre/',include('gre.urls', namespace='gre')),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^',include('Blog.urls', namespace='blog')),
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
 #Adding +static.... resolved the issue

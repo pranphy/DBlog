@@ -1,12 +1,11 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^download$',views.download, name="download"),
-    url(r'^detail/(?P<pslug>[\w-]+)$', views.detail, name='detail'),
-    url(r'^.+$',views.handler404, name="404"),
+    url(r'^$', views.BlogIndex.as_view(), name='index'),
+    url(r'^detail/(?P<pslug>[\w-]+)$', views.BlogDetail.as_view(), name='detail'),
+    url(r'^download$',views.BlogDownload.as_view(), name="download"),
 ]
 
 handler404 = 'RBlog.views.handler404'

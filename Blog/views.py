@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.utils import timezone
+from django.views.generic import View
+
 
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
@@ -18,22 +20,34 @@ from .models import Comment
 from .forms import CommentForm
 
 
-def index(request):
-    allposts = BlogPost.objects.all()
-    template = loader.get_template('Blog/index.html')
-    Repeat = [1,2]
+class BlogIndex(View):
 
-    context   = {
-        'Repeat' : Repeat,
-        'allposts' : allposts,
-    }
-    return HttpResponse(template.render(context,request))
+    def get(self,request):
+        allposts = BlogPost.objects.all()
+        template = loader.get_template('Blog/index.html')
+        Repeat = [1,2]
 
-def detail(request,pslug):
-    currentpost = get_object_or_404(BlogPost,slug=pslug) 
-    comments = Comment.objects.filter(blogpost=currentpost)
-    template = loader.get_template('Blog/details.html')
-    if request.POST:
+        context   = {
+            'Repeat' : Repeat,
+            'allposts' : allposts,
+        }
+        return HttpResponse(template.render(context,request))
+
+class BlogDetail(View):
+    def get(self,request,pslug):
+        currentpost = get_object_or_404(BlogPost,slug=pslug) 
+        comments = Comment.objects.filter(blogpost=currentpost)
+        template = loader.get_template('Blog/details.html')
+        form = CommentForm()
+        context = {
+            'post' : currentpost,
+            'form' : form,
+            'comments' : comments,
+        }
+        return HttpResponse(template.render(context,request))
+
+    def post(self,request,pslug):
+        currentpost = get_object_or_404(BlogPost,slug=pslug) 
         name = request.POST.get('commenter')
         email = request.POST.get('email')
         comment = request.POST.get('comment')
@@ -43,21 +57,14 @@ def detail(request,pslug):
             blogpost=currentpost
         )
         CommentObject.save()
-
-    form = CommentForm()
-    context = {
-        'post' : currentpost,
-        'form' : form,
-        'comments' : comments,
-    }
-    return HttpResponse(template.render(context,request))
+        return HttpResponseRedirect('/blog/detail/'+pslug)
 
     
-def download(request):
-    template = loader.get_template('Blog/download.html')
-    context = {}
-    
-    return HttpResponse(template.render(context,request))
+class BlogDownload(View):
+    def get(self,request):
+        template = loader.get_template('Blog/download.html')
+        context = {}
+        return HttpResponse(template.render(context,request))
 
 def handler404(request):
     response = render_to_response('404.html',{},context_instance=RequestContext(request))

@@ -31,7 +31,7 @@
         <span class="card-content teal-text text-darken-2" style="font-size:1.5em">Leave Comments</span>
         </div>
         {# auto generated form down #}
-        <form action="{% url 'detail' post.slug %}" method="post">
+        <form action="{% url 'blog:detail' pslug=post.slug %}" method="post">
            {% csrf_token %}
            {{form.non_field_errors }}
            <div class="row">
