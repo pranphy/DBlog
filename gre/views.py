@@ -4,6 +4,7 @@ import datetime
 
 from django.http import HttpResponse
 from django.utils import timezone
+from django.views.generic import View
 
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -16,46 +17,51 @@ from django.template import loader
 from .models import Tag 
 from .models import Vocab 
 
-def index(request):
-    allword = list(Vocab.objects.all())
-    random.shuffle(allword)
 
-    template = loader.get_template('gre/index.html')
-    Repeat = [1,2]
-    context   = {
-        'Repeat' : Repeat,
-        'allword' : allword,
-    }
-    return HttpResponse(template.render(context,request))
+class GreIndex(View):
+    def get(self,request):
+        allword = list(Vocab.objects.all())
+        random.shuffle(allword)
 
-def meaning(request,pword):
-    currentword = get_object_or_404(Vocab,word = pword) 
-    template = loader.get_template('gre/meaning.html')
-    context = {
-        'pword':pword,
-        'currentword': currentword
-    }
-    return HttpResponse(template.render(context,request))
+        template = loader.get_template('gre/index.html')
+        Repeat = [1,2]
+        context   = {
+            'Repeat' : Repeat,
+            'allword' : allword,
+        }
+        return HttpResponse(template.render(context,request))
 
-def tag(request,ptag):
-    tagids = get_list_or_404(Tag,tagname__contains = ptag)
-    tagwords = get_list_or_404(Vocab,category__in = tagids)
-    template = loader.get_template('gre/tags.html')
-    context = { 
-        'tagwords':tagwords,
-        'tag' : ptag
-    }
-    return HttpResponse(template.render(context,request))
+class GreMeaning(View):
+    def get(self,request,pword):
+        currentword = get_object_or_404(Vocab,word = pword) 
+        template = loader.get_template('gre/meaning.html')
+        context = {
+            'pword':pword,
+            'currentword': currentword
+        }
+        return HttpResponse(template.render(context,request))
 
-def alltag(request):
-    template = loader.get_template('gre/alltags.html')
-    alltags = Tag.objects.all()
-    tagvocab = {}
-    for tag in alltags:
-        allwords = Vocab.objects.filter(category = tag.id)
-        tagvocab[tag.tagname] = allwords
+class GreTag(View):
+    def get(self,request,ptag):
+        tagids = get_list_or_404(Tag,tagname__contains = ptag)
+        tagwords = get_list_or_404(Vocab,category__in = tagids)
+        template = loader.get_template('gre/tags.html')
+        context = { 
+            'tagwords':tagwords,
+            'tag' : ptag
+        }
+        return HttpResponse(template.render(context,request))
 
-    context = {
-        'tagvocab' : tagvocab
-    }
-    return HttpResponse(template.render(context, request))
+class GreAllTag(View):
+    def get(self,request):
+        template = loader.get_template('gre/alltags.html')
+        alltags = Tag.objects.all()
+        tagvocab = {}
+        for tag in alltags:
+            allwords = Vocab.objects.filter(category = tag.id)
+            tagvocab[tag.tagname] = allwords
+
+        context = {
+            'tagvocab' : tagvocab
+        }
+        return HttpResponse(template.render(context, request))
