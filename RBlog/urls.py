@@ -20,6 +20,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+import django.views.defaults
+
 urlpatterns = [
     url(r'^blog/',include('Blog.urls', namespace='blog')),
     url(r'^gre/',include('gre.urls', namespace='gre')),
