@@ -12,3 +12,21 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.body{
+    font-size: 10;
+}
+
+.pr-menu-back {
+    height:240px;
+    background: url('../images/material-back-teal.png');
+    margin: 0px;
+    padding: 0px;
+}
+
+.pr-menu-back-empty{
+    height: 60px;
+}
+.pr-menu-close-button a:hover{
+    text-decoration-color: red;
+}

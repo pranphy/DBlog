@@ -1,16 +1,48 @@
 {%load staticfiles %}
 {% block navbar %}
 <nav class="teal darken-2" role="navigation">
-    <div class="nav-wrapper container" ><a id="logo-container" href="#" class="brand-logo"><img src="{% static 'images/pranphy-icon.png'%}" style="height: 35px; width=35px"/> Pranphy</a>
-      <ul class="right hide-on-med-and-down">
+  <div class="nav-wrapper " >
+    <div class="center-align" >
+        <a id="logo-container" href="#" class="brand-logo">
+            <img src="{% static 'images/pranphy-icon.png'%}" style="height: 35px; width=35px"/>
+        </a>
+    </div>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/">Login</a></li>
+    </ul>
+    <div id="pull-menu" class="side-nav">
+      {%block menuback%}
+        <div class="pr-menu-back teal">
+          <div class="row">
+            <div class="col s12">
+              <div class="row">
+                <div class="col s12">
+                  <a href="#" class="white-text" onclick="$('.button-collapse').sideNav('show');">
+                    <i class="material-icons">close</i>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <div class="pr-menu-back-empty"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <span class="white-text">I am a small slogan</span>
+                </div>
+              </div> <!-- slogan -->
+            </div><!--col -->
+          </div> <!-- row -->
+        </div> <!-- pr-menu-back -->
+      {%endblock menuback%}
+      <ul id="nav-collapse" class="side-nav-">
         <li><a href="/">Home</a></li>
         <li><a href="{% url 'blog:download' %}">Downloads</a></li>
         <li><a href="{% url 'gre:index' %}">GRE</a></li>
       </ul>
-      <ul id="nav" class="side-nav">
-        <li><a href="/">Home</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
+    </div> <!-- pull-menu -->
+    <a href="#!" data-activates="pull-menu" class="button-collapse show-on-large" onclick="Materialize.showStaggeredList('#nav-collapse')"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
 {%endblock navbar%}
