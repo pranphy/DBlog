@@ -25,8 +25,16 @@
 }
 
 .pr-menu-back-empty{
-    height: 60px;
+    height: 64px;
 }
 .pr-menu-close-button a:hover{
     text-decoration-color: red;
+}
+.pr-slogan-rigor{
+    margin:0px;
+}
+.pr-container{
+    padding: 0px;
+        padding-left: 45px;
+        padding-right: 45px;
 }
