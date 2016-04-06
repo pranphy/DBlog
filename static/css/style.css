@@ -6,6 +6,14 @@
  * Made By MaterializeCSS.com
  */
 
+@font-face {
+  font-family: 'Gentium Served';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../font/general/Gentium Regular.ttf');
+  src: local('Gentium Regular')
+  format('ttf');
+}
 
 .icon-block {
   padding: 0 15px;
@@ -38,4 +46,11 @@
     padding: 0px;
         padding-left: 45px;
         padding-right: 45px;
+}
+
+.body{
+    font-family: 'Gentium Served';
+}
+.pr-blog-content, .pr-word-meaning {
+    font-family: 'Gentium Served' ;
 }
