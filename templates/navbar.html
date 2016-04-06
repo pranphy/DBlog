@@ -1,15 +1,21 @@
 {%load staticfiles %}
 {% block navbar %}
-<nav class="blue accent-4 pr-container" role="navigation">
-  <div class="nav-wrapper " >
+<nav class="blue accent-4 pr-container" role="navigation" >
+  <div class="nav-wrapper ">
     <div class="center-align" >
         <a id="logo-container" href="#" class="brand-logo">
             <img src="{% static 'images/pranphy-icon.png'%}" style="height: 35px; width=35px"/>
         </a>
     </div>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="/">Login</a></li>
-    </ul>
+    <div id = "menu-ellipsis" class="right hide-on-large">
+    <a class='dropdown-button' href='#' data-activates='pr-login-dropdown'><i class="material-icons">more_vert</i></a>
+      <ul id='pr-login-dropdown' class='dropdown-content'>
+        <li><a href="#!">Login</a></li>
+        <li><a href="#!">Logout</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Setting</a></li>
+      </ul>
+    </div>
     <div id="pull-menu" class="side-nav">
       {%block menuback%}
         <div class="pr-menu-back teal">
@@ -37,7 +43,7 @@
         </div> <!-- pr-menu-back -->
       {%endblock menuback%}
       <ul id="nav-collapse" class="side-nav-">
-        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'blog:index' %}">Home</a></li>
         <li><a href="{% url 'blog:download' %}">Downloads</a></li>
         <li><a href="{% url 'gre:index' %}">GRE</a></li>
       </ul>
