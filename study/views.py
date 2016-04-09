@@ -51,3 +51,14 @@ class TestView(View):
         return HttpResponseRedirect('/study/test/')
 
 
+class MarkdownTest(View):
+    def get(self,request):
+        text = ''
+        with open('study/markdown/Test.md') as testmd:
+            text = testmd.read()
+
+        context = {'mdtext' : text };
+        template = loader.get_template('study/mdview.html')
+        return HttpResponse(template.render(context,request))
+
+
