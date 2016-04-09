@@ -18,7 +18,7 @@
                     <span class="card-content teal-text text-darken-2" style="font-size:1.5em">Leave Comments</span>
                     </div>
                     {# auto generated form down #}
-                    <form action="{% url 'study:test'%}" method="post">
+                    <form action="{% url 'study:test'%}" method="post" enctype="multipart/form-data">
                        {% csrf_token %}
                        {{form.non_field_errors }}
                        <div class="row">
@@ -46,7 +46,7 @@
                             {{form.uploadfile}}
                           </div>
                           <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                            <input class="file-path validate" type="text" placeholder="Upload one or more files" name="filename">
                           </div>
                         </div>
                       </div>

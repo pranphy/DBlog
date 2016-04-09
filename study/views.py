@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from django.shortcuts import render_to_response
 from django.shortcuts import render
@@ -14,8 +15,6 @@ from django.views.generic import View
 
 
 from .forms import TestForm
-
-import os
 
 class StudyIndex(View):
     def get(self,request):
@@ -33,12 +32,11 @@ class TestView(View):
         return HttpResponse(template.render(context,request))
 
 
-    def handle_upload_file(self,f):
+    def handle_upload_file(self,rfile,receivedfilename):
         # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-        with open(BASE_DIR+'/static/images/test','wb+') as destination:
-            for chunk in f.chunks():
+        with open(BASE_DIR+'/static/uploads/' + receivedfilename,'wb+') as destination:
+            for chunk in rfile.chunks():
                 destination.write(chunk)
 
 
@@ -48,7 +46,8 @@ class TestView(View):
         comment = request.POST.get('comment')
         form = TestForm(request.POST,request.FILES)
         receivedfile = request.FILES['uploadfile']
-        self.handle_upload_file(receivedfile)
+        receivedfilename = request.POST.get('filename')
+        self.handle_upload_file(receivedfile,receivedfilename)
         return HttpResponseRedirect('/study/test/')
 
 
