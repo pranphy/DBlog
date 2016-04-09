@@ -34,7 +34,7 @@
 }
 
 .pr-menu-back-empty{
-    height: 100px;
+    height: 150px;
 }
 .pr-menu-close-button a:hover{
     text-decoration-color: red;
@@ -85,4 +85,8 @@ nav i.material-icons{
   background: white;
   text-decoration-color: green;
   color: gray;
+}
+
+.row {
+  margin-bottom: 5px;
 }
