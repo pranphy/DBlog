@@ -34,12 +34,13 @@
 }
 
 .pr-menu-back-empty{
-    height: 64px;
+    height: 100px;
 }
 .pr-menu-close-button a:hover{
     text-decoration-color: red;
 }
 .pr-slogan-rigor{
+    text-align: center;
     margin:0px;
 }
 .pr-container{
@@ -53,4 +54,35 @@
 }
 .pr-blog-content, .pr-word-meaning {
     font-family: 'Gentium Served' ;
+}
+
+blockquote{
+    background: rgba(14, 90, 245, 0.27);
+}
+
+nav ul a {
+  transition: transparent 0.025s;
+}
+
+.side-nav a{
+  height: 35px;
+  line-height: 35px;
+}
+.side-nav li{
+  padding-right: 0px;
+  padding-left: 5px;
+}
+
+.side-nav li:hover{
+  background: gray;
+}
+nav i.material-icons{
+  height: inherit;
+  line-height: inherit;
+}
+
+.side-nav li a:hover{
+  background: white;
+  text-decoration-color: green;
+  color: gray;
 }
