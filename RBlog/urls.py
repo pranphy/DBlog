@@ -28,6 +28,6 @@ urlpatterns = [
     url(r'^study/',include('study.urls', namespace='study')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^',include('Blog.urls', namespace='blog')),
-] #+ static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
 #Adding +static.... resolved the issue
