@@ -2,7 +2,7 @@ Title
 =====
 > A markdown test
 
-[Link]('/gre/tag/')
+[Link](/gre/tag/)
 
 ### Subtitle ###
 This is **bold** some code `code`

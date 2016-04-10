@@ -16,11 +16,13 @@ from django.views.generic import View
 
 from .forms import TestForm
 
+
 class StudyIndex(View):
     def get(self,request):
         template = loader.get_template('study/index.html')
         context = {}
         return HttpResponse(template.render(context,request))
+
 
 class TestView(View):
     def get(self,request):
@@ -30,7 +32,6 @@ class TestView(View):
             'form' : form,
         }
         return HttpResponse(template.render(context,request))
-
 
     def handle_upload_file(self,rfile,receivedfilename):
         # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
