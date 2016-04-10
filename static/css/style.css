@@ -65,7 +65,8 @@ code {
 }
 
 blockquote{
-    background: rgba(14, 90, 245, 0.27);
+    background: rgba(124, 171, 231, 0.09);
+    border-left: 5px solid rgba(73, 27, 255, 0.8);
 }
 
 nav ul a {
