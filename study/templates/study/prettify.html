@@ -1,0 +1,47 @@
+{%load staticfiles %}
+{%load BlogExtras %}
+{%block prettify%}
+<div class="row">
+    <div class="col s12">
+       <div class="card">
+          <div class="card-content">
+              <div class="row">
+                <div class="col s7 m8 l10">
+                  <span class="card-title teal-text text-darken-3" style="font-size: 2em">
+                      <a href="{% url 'study:test' %}">This is teh title of this post</a>
+                  </span>
+              </div>
+              <div class="col s5 m4  l2">
+                  <span class="blue-text text-darken-2" style="text-align: right;">2016 March 32</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="pr-blog-content" style="text-align: justify; font-size: 1.2em">
+                Exporting table into Latex Table
+
+              <pre class="prettyprint lang-cpp"><code class="language-cpp">{% block codeexample%} for (int i = 0; i != 5; i++){
+    printf('%d',i);
+    if( x == 5){
+        int Value = ValueOf(x); //Simple function here
+        int c = p # ValueOf(c);
+    } else {
+        float Value = ValueOf(x*5)
+    }
+}{%endblock codeexample%}</code></pre>
+              Also adding some more code will make it prettier
+              <pre class="prettyprint">
+              <code>
+                def a_function(self, name):
+                    name = a + function
+                    # this is comment of course
+                
+                print('This works in python3')
+              </code>
+              </pre>
+            </div>
+          </div>
+          </div><!--Card content -->
+       </div><!--card-->
+    </div><!--col-->
+</div><!--row-->
+{%endblock prettify%}

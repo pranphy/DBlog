@@ -25,13 +25,18 @@
 .body{
     font-size: 10;
 }
+html{
+    font-size: 12px;
+}
 code {
-    background: #e7e7e7;
-    border-radius: 6px;
     padding: 0px;
     padding-left:3px;
     padding-right: 3px;
-    font-family: 'Monaco';
+    font-family: 'consolas';
+}
+
+.dropdown-content {
+    margin: 15px;
 }
 
 .pr-menu-back {
@@ -67,6 +72,8 @@ code {
 blockquote{
     background: rgba(124, 171, 231, 0.09);
     border-left: 5px solid rgba(73, 27, 255, 0.8);
+    padding: 10px;
+    padding-left: 20px
 }
 
 nav ul a {
