@@ -10,8 +10,9 @@
   <link href="{%static 'css/MaterialFonts.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{%static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{%static 'css/style.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{%static 'css/prettify/prettify.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body>
+<body onload="prettyPrint()">
     {%include "navbar.html" %}
     {%block bodycontent%} {% endblock bodycontent %}
     {%include "footer.html" %}
@@ -19,5 +20,6 @@
   <script src="{%static 'js/jquery-2.1.4.min.js'%}"></script>
   <script src="{%static 'js/materialize.js' %}"></script>
   <script src="{%static 'js/init.js'%}"></script>
+  <script src="{%static 'js/prettify/prettify.js' %}"></script>
   </body>
 </html>
