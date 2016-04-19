@@ -1,0 +1,11 @@
+cataclysm
+glib
+hoard
+importune
+mien
+puny
+redolent
+staunch
+saultry
+temerity
+vogue
