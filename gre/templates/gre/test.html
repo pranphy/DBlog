@@ -1,11 +1,12 @@
 {%extends "base.html" %}
 {%load staticfiles %}
+{%load GreExtras %}
 {%block bodycontent %}
 
 <div class="container">
 <div class="row">
     <div class="col l12 s12 m12">
-      {% for word,defs in worddef.items %}
+      {% for word,info in worddef.items %}
       <div class="card">
         <div class="card-content black-text">
           <div class="row">
@@ -21,9 +22,12 @@
             <div class="divider"></div>
             <div class="content" style="text-align: justify; font-size: 1.2em">
             <p>
-            <div class="purple-text text-lighten-1">{{defs.short_def |safe}}</div>  <br/>
-            <div class="black-text text-lighten-3"><i><blockquote>{{defs.long_def|safe}}</blockquote></i></div>  <br/>
+            <div class="purple-text text-lighten-1">{{info|get_short_def|safe}}</div>  <br/>
+            <div class="black-text text-lighten-3"><i><blockquote>{{info|get_long_def|safe}}</blockquote></i></div>  <br/>
             <div style="font-size:0.8em">
+                {% for sent in info|get_sent_list %}
+                <p><a href="{{sent|get_url}}" target="_blank">{{sent|get_sentence|safe}}</a></p>
+                {%endfor%}
             </div>
           </div>
           <div class="divider"></div>

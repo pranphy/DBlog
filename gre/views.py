@@ -3,6 +3,7 @@ import os
 import requests
 import random
 import datetime
+import json
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -95,6 +96,20 @@ class TestScrap(View):
                 Word = OneWord.strip()
                 Word.replace('\n','')
                 yield Word
+    
+    def get_sentences(self,word):
+        url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
+        soup = BeautifulSoup(urlopen(url))
+        jsn = str(soup.select('body p')[0].string)
+        sent_dict = json.loads(jsn)
+        example_list= [] 
+        for obj in sent_dict['result']['sentences']:
+            sent_info = {}
+            sent_info['sentence'] = obj['sentence']
+            sent_info['url'] = obj['volume']['locator']
+            example_list.append(sent_info)
+
+        return example_list
 
     def get_def(self,word):
         url = "http://vocabulary.com/dictionary/"+word
@@ -112,8 +127,10 @@ class TestScrap(View):
         i = 0
         for word in self.allwords():
             i += 1
-            worddef[word] = self.get_def(word)
-
+            word_info  = {}
+            word_info['def'] = self.get_def(word)
+            word_info['sentences'] = self.get_sentences(word)
+            worddef[word] =  word_info
 
         context = { 
             'worddef':worddef,
