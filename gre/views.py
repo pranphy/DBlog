@@ -100,8 +100,12 @@ class TestScrap(View):
     def get_sentences(self,word):
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
         soup = BeautifulSoup(urlopen(url))
-        #jsn = str(soup)
-        jsn = str(soup.select('body p')[0].string)
+        jsn = ''
+        try:
+            jsn = str(soup.select('body p')[0].string)
+        except:
+            jsn = str(soup)
+
         sent_dict = json.loads(jsn)
         example_list= [] 
         for obj in sent_dict['result']['sentences']:
