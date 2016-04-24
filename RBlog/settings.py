@@ -89,12 +89,8 @@ WSGI_APPLICATION = 'RBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'myblog_test',
-        'USER': 'pranphy',
-        'PASSWORD':'lagrangian',
-        'HOST':'localhost',
-        'PORT':'',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 

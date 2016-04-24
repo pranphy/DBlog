@@ -142,6 +142,3 @@ class TestScrap(View):
             'count':i,
         }
         return HttpResponse(template.render(context,request))
-
-
-        
