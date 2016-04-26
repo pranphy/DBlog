@@ -97,6 +97,7 @@ class TestScrap(View):
                 Word.replace('\n','')
                 yield Word
     
+
     def get_sentences(self,word):
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
         soup = BeautifulSoup(urlopen(url))
@@ -108,11 +109,18 @@ class TestScrap(View):
 
         sent_dict = json.loads(jsn)
         example_list= [] 
-        for obj in sent_dict['result']['sentences']:
+        try:
+            for obj in sent_dict['result']['sentences']:
+                sent_info = {}
+                sent_info['sentence'] = obj['sentence']
+                sent_info['url'] = obj['volume']['locator']
+                example_list.append(sent_info)
+        except:
             sent_info = {}
-            sent_info['sentence'] = obj['sentence']
-            sent_info['url'] = obj['volume']['locator']
+            sent_info['sentence'] = 'Not found'
+            sent_info['url'] = "#"
             example_list.append(sent_info)
+
 
         return example_list
 
@@ -124,7 +132,7 @@ class TestScrap(View):
             longdef = soup.select('.definitionsContainer .main .section p.long')[0]
             return self.WordDefs(str(shortdef),str(longdef))
         except:
-            return self.WordDefs('not fount','not found')
+            return self.WordDefs('not found','not found')
 
     def get(self,request):
         template = loader.get_template('gre/test.html')
