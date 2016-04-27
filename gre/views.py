@@ -12,7 +12,7 @@ from urllib.error import URLError
 from bs4 import BeautifulSoup
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import View
 
@@ -105,9 +105,13 @@ class TestScrap(View):
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         with open(BASE_DIR+'/gre/static/media/default.txt') as wordlist:
             for OneWord in wordlist:
-                Word = OneWord.strip()
-                Word.replace('\n','')
-                yield Word
+                word = OneWord.strip()
+                word.replace('\n','')
+                yield word
+
+    def fetch_from_list(self,wordlist):
+        for word in wordlist.split(','):
+            yield word
     
 
     def get_local_def(self,localvocab):
@@ -184,25 +188,36 @@ class TestScrap(View):
 
             shortdef = soup.select('.definitionsContainer .main .section p.short')[0]
             longdef = soup.select('.definitionsContainer .main .section p.long')[0]
-            logging.info('Type of shortdef is {} and str(shortdef) is {}'.format(type(shortdef),str(shortdef)))
+            #logging.info('Type of shortdef is {} and str(shortdef) is {}'.format(type(shortdef),str(shortdef)))
 
             VcVocab_obj = VcVocab(word=word, meaning = 'dummy', short_def = str(shortdef), long_def = str(longdef))
             logging.info(' The word {} is found online '.format(word))
             return VcVocab_obj
         except URLError as e:
-            logging.info(' There is no internet connection ')
+            logging.error(' There is no internet connection ')
             raise NoInternet()
         except IndexError as e:
             logging.info(' There is no such word in internet connection ')
             raise NoWordInInternet()
 
     def get(self,request):
+        logging.info(' Bravoo :: GET ')
+        wordlist = request.GET.get('wordlist')
+        word_generator = self.allwords()
+        if wordlist:
+            logging.info('Wordlist is not empty ')
+            word_generator = self.fetch_from_list(wordlist)
+
+        else:
+            logging.info('Wordlist is empty ')
+
+        logging.info('Wordlist is {}'.format(wordlist))
         logging.info(" ==========================================")
         logging.info(" I got a request to this file")
         template = loader.get_template('gre/test.html')
         worddef = {}
         i = 0
-        for word in self.allwords():
+        for word in word_generator: 
             logging.info(' Got word {}'.format(word))
             i += 1
             word_info  = {}
@@ -253,3 +268,8 @@ class TestScrap(View):
             'count':i,
         }
         return HttpResponse(template.render(context,request))
+    def post(self,request):
+        wordlist = request.POST.get('wordlist')
+        logging.info('POST::Got words {}'.format(wordlist))
+        return HttpResponseRedirect('/gre/test/')
+
