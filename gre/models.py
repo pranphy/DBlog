@@ -1,7 +1,7 @@
-from django.db import models
 import datetime
 
 from django.utils import timezone
+from django.db import models
 
 class Source(models.Model):
     class Type(models.Model):
