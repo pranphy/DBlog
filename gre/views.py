@@ -7,6 +7,8 @@ import json
 import logging
 
 from urllib.request import urlopen
+from urllib.error import URLError
+
 from bs4 import BeautifulSoup
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,6 +28,10 @@ from .models import Tag
 from .models import Vocab 
 from .models import VcVocab
 from .models import VcSentence
+
+from .error import NoInternet
+from .error import NoSentenceInJson 
+from .error import NoWordInInternet
 
 
 logging.basicConfig(filename="NewLog.log",level=logging.DEBUG)
@@ -79,6 +85,7 @@ class GreAllTag(View):
         return HttpResponse(template.render(context, request))
 
 class TestScrap(View):
+    #should be deprecated in near future
     class WordDefs():
         short_def = ''
         long_def = ''
@@ -91,8 +98,7 @@ class TestScrap(View):
 
         def set_long_def(self,ldef):
             self.long_def = ldef
-
-
+    #class WordDefs () should be deprecated
 
 
     def allwords(self):
@@ -103,16 +109,6 @@ class TestScrap(View):
                 Word.replace('\n','')
                 yield Word
     
-    def get_local_vocab(self,word):
-        try:
-            logging.info(' Testing if the word {} is in local vocab'.format(word))
-            localvocab = VcVocab.objects.get(word=word)
-            logging.info(' The word {} is in local vocab'.format(word))
-            return localvocab
-        except ObjectDoesNotExist as e:
-            logging.info(' Error found {}'.format(str(e)))
-            logging.info('The word {} is not in local vocab'.format(word))
-            return False
 
     def get_local_def(self,localvocab):
         short_def = localvocab.short_def
@@ -125,7 +121,7 @@ class TestScrap(View):
         return word_info
 
     def get_local_sentences(self,localvocab):
-        sent_obj_list =  VcSentence.objects.get(vocab=localvocab)
+        sent_obj_list =  VcSentence.objects.filter(vocab=localvocab)
         example_list = []
         for sentence_obj in sent_obj_list:
             sent_info = {}
@@ -139,71 +135,66 @@ class TestScrap(View):
         logging.info(' I am trying to find sentences online for word {}'.format(word))
         logging.info('type of vcvocab is \n {} \n'.format(type(vocabobj)))
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
-        soup = BeautifulSoup(urlopen(url),"lxml")
-        jsn = ''
-        try:
-            jsn = str(soup.select('body p')[0].string)
-        except IndexError as e:
-            jsn = str(soup)
 
-        sent_dict = json.loads(jsn)
-        example_list= [] 
-        try:
-            
-            for obj in sent_dict['result']['sentences']:
-                sent_info = {}
-                sent_info['sentence'] = obj['sentence']
-                sent_info['url'] = obj['volume']['locator']
-                example_list.append(sent_info)
-                VcSentence_obj = VcSentence(
-                    sentence = obj['sentence'],
-                    url = sent_info['url'],
-                    vocab = vocabobj
-                )
-                try:
-                    logging.info(' Tryig to save sentences  for {} '.format(word))
-                    #VcSentence_obj.save()
-                    logging.info(' ---- success')
-                except TypeError as e:
-                    logging.info(' ------------------failed ::TypeError :::'.format(str(e)))
+        # See if thre is internet connection 
+        try :
+            sent_page = urlopen(url)
+            soup = BeautifulSoup(sent_page,"lxml")
+            jsn = ''
+            try:
+                jsn = str(soup.select('body p')[0].string)
+            except IndexError as e:
+                jsn = str(soup)
 
-        except KeyError as e:
-            logging.info(' Error found {}'.format(str(e)))
-            logging.info(' No sentences for word {} found '.format(word))
-            sent_info = {}
-            sent_info['sentence'] = 'Not found'
-            sent_info['url'] = "#"
-            example_list.append(sent_info)
+            sent_dict = json.loads(jsn)
+            try:
+                vocabobj.save()
+                example_list= [] 
+                for obj in sent_dict['result']['sentences']:
+                    sent_info = {}
+                    sent_info['sentence'] = obj['sentence']
+                    sent_info['url'] = obj['volume']['locator']
+                    example_list.append(sent_info)
+                    VcSentence_obj = VcSentence(
+                        sentence = obj['sentence'],
+                        url = sent_info['url'],
+                        vocab = vocabobj
+                    )
+                    VcSentence_obj.save()
+                #end for
+                return  example_list
+            except KeyError as e:
+                logging.info(' Error found {}'.format(str(e)))
+                logging.info(' No sentences for word {} found '.format(word))
+                raise NoSentenceInJson
 
+        # Since there is no internet connection
+        except URLError as e:
+            raise NoInternet
 
-        return example_list
-
-    def get_online_vocabobj(self,word):
+        
+    def get_online_vocab(self,word):
         logging.info('Trying to search the word {} online'.format(word))
-        url = "http://vocabulary.com/dictionary/"+word
-        soup = BeautifulSoup(urlopen(url),"lxml")
+        vocurl = "http://vocabulary.com/dictionary/"+word
+        # Check if internet connection is online
         try:
+            #get vocab info from this page 
+            voc_page = urlopen(vocurl)
+            soup = BeautifulSoup(voc_page,"lxml")
 
             shortdef = soup.select('.definitionsContainer .main .section p.short')[0]
             longdef = soup.select('.definitionsContainer .main .section p.long')[0]
-            VcVocab_obj = VcVocab(
-                word=word,
-                meaning = 'dummy',
-                short_def = shortdef,
-                long_def = longdef
-            )
-            logging.info(' The word {} is found online '.format(word))
-            logging.info('The found object is \n {} \n '.format(VcVocab_obj))
+            logging.info('Type of shortdef is {} and str(shortdef) is {}'.format(type(shortdef),str(shortdef)))
 
-            try:
-                VcVocab_obj.save()
-                logging.info(' --- Success ')
-            except TypeError as e:
-                logging.info(' ---------FAILED to save: Object not got ::: {}'.format(str(e)))
-            return  VcVocab_obj
-        except:
-            logging.info(' The word {} is not found online '.format(word))
-            return False
+            VcVocab_obj = VcVocab(word=word, meaning = 'dummy', short_def = str(shortdef), long_def = str(longdef))
+            logging.info(' The word {} is found online '.format(word))
+            return VcVocab_obj
+        except URLError as e:
+            logging.info(' There is no internet connection ')
+            raise NoInternet()
+        except IndexError as e:
+            logging.info(' There is no such word in internet connection ')
+            raise NoWordInInternet()
 
     def get(self,request):
         logging.info(" ==========================================")
@@ -215,30 +206,48 @@ class TestScrap(View):
             logging.info(' Got word {}'.format(word))
             i += 1
             word_info  = {}
-            localvocab = self.get_local_vocab(word)
-            logging.info(' Returned back from local vocab for word {}'.format(word))
-            if localvocab !=False:
-                logging.info(' word :',word,' exists in local ')
-                word_info['def'] = localvocab['def']
-                word_info['meaning'] = localvocab['meaning']
-                word_info['sentences'] = get_local_sentences(localvocab)
-            else:
-                logging.info(' word : {} doesnt exist in local '.format(word))
-                VcVocab_obj = self.get_online_vocabobj(word)
-                if VcVocab_obj != False:
-                    logging.info(' Fetched the word info for {} from internet '.format(word))
-                    VcSentence_obj = self.get_online_sentences(word,VcVocab_obj)
+            
+            #Try to find the word out in local Database
+            try:
+                logging.info('Trying to find the  word {} exists in local '.format(word))
+                localvocab = VcVocab.objects.get(word=word)
+                logging.info(' The word {} exists in local vocab '.format(word))
+                word_info['def'] =  self.WordDefs(localvocab.short_def,localvocab.long_def)
+                word_info['meaning'] = localvocab.meaning
+
+                #fetch sentences from loca vocab
+                word_info['sentences'] = self.get_local_sentences(localvocab)
+
+                
+            # If the object is not in local database try to fetch from the internet
+            except ObjectDoesNotExist as e:
+                logging.info(' info or sentence for : {} doesnt exist in local '.format(word))
+                try:
+                    VcVocab_obj = self.get_online_vocab(word)
 
                     word_info['def'] = self.WordDefs(VcVocab_obj.short_def,VcVocab_obj.long_def)
                     word_info['meaning'] = VcVocab_obj.meaning
-                    word_info['sentences'] = self.get_online_sentences(word,VcVocab_obj)
-                else:
-                    word_info['def'] = self.WordDefs('Not found','Not Found')
-                    word_info['meaning'] = 'Not found '
-                    word_info['sentences']=[]
 
+                    try:
+                        word_info['sentences'] = self.get_online_sentences(word,VcVocab_obj)
+                        logging.info(word_info['sentences'])
+                    except NoSentenceInJson:
+                        word_info['sentences'] = [{'sentence':'no sentence in json','url':'#'}]
+                    except NoInternet:
+                        word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
+                #Can't fetch vocab object
+                except NoInternet:
+                    word_info['def'] = self.WordDefs('No internet','NoInternet')
+                    word_info['meaning'] = 'No Internet '
+                    word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
+                except NoWordInInternet:
+                    word_info['def'] = self.WordDefs('No word in internet','No word in Internet')
+                    word_info['meaning'] = 'No such word Internet '
+                    word_info['sentences'] = [{'sentence':'no such word in internet ','url':'#'}]
+                #handled word from internet completely
+            #handeled word from local or internet completely
             worddef[word] =  word_info
-
+        #endfor interated for each word
         context = { 
             'worddef':worddef,
             'count':i,

@@ -2,44 +2,57 @@
 {%load staticfiles %}
 {%load GreExtras %}
 {%block bodycontent %}
-
+{% comment %}
+{% endcomment %}
 <div class="container">
-<div class="row">
-    <div class="col l12 s12 m12">
-      {% for word,info in worddef.items %}
-      <div class="card">
-        <div class="card-content black-text">
-          <div class="row">
-              <div class="col s12 m8 l10">
-                  <span class="card-title teal-text text-darken-3" style="font-size: 2em:text-align:center;">
-                      {{word}}
-                  </span>
-              </div>
-              <div class="col s12 m4  l2">
-                  <!--span class="blue-text text-darken-2" style="text-align: right;">{ {currentword.createdate|date:"F j, Y"}}</span-->
-              </div>
-            </div>
-            <div class="divider"></div>
-            <div class="content" style="text-align: justify; font-size: 1.2em">
-            <p>
-            <div class="purple-text text-lighten-1">{{info|get_short_def|safe}}</div>  <br/>
-            <div class="black-text text-lighten-3"><i><blockquote>{{info|get_long_def|safe}}</blockquote></i></div>  <br/>
-            <div style="font-size:0.8em">
-                {% for sent in info|get_sent_list %}
-                <p><a href="{{sent|get_url}}" target="_blank">{{sent|get_sentence|safe}}</a></p>
-                {%endfor%}
-            </div>
+  {% block searchbar %}
+    <form action="{% url 'gre:test'%}" method="post">
+    {% csrf_token %}
+    <div class="card" style="background: rgba(255,255,255,0.9)">
+       <div class="baack-text">
+         <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="id_commenter" maxlength="100" name="commenter" type="text" />
+            <label for="id_commenter">Enter your name:</label>
+          </div><!--col -->
+         </div> <!--row -->
+       </div>
+    </div>
+    </form>
+  {% endblock searchbar %}
+  {% for word,info in worddef.items %}
+  <div class="card">
+    <div class="card-content black-text">
+      <div class="row">
+          <div class="col s12 m8 l10">
+              <span class="card-title teal-text text-darken-3" style="font-size: 2em:text-align:center;">
+                  {{word}}
+              </span>
           </div>
-          <div class="divider"></div>
-          <br/>
+          <div class="col s12 m4  l2">
+              <!--span class="blue-text text-darken-2" style="text-align: right;">{ {currentword.createdate|date:"F j, Y"}}</span-->
+          </div>
         </div>
-        
-        <div class="card-action">
-          <a href="#">This is a link</a>
+        <div class="divider"></div>
+        <div class="content" style="text-align: justify; font-size: 1.2em">
+        <p>
+        <div class="purple-text text-lighten-1">{{info|get_short_def|safe}}</div>  <br/>
+        <div class="black-text text-lighten-3"><i><blockquote>{{info|get_long_def|safe}}</blockquote></i></div>  <br/>
+        <div style="font-size:0.8em">
+            {% for sent in info|get_sent_list %}
+            <p><a href="{{sent|get_url}}" target="_blank">{{sent|get_sentence|safe}}</a></p>
+            {%endfor%}
         </div>
       </div>
-      {% endfor %}
+      <div class="divider"></div>
+      <br/>
     </div>
-</div><!--row-->
-</div><!--container -->
+    
+    <div class="card-action">
+      <a href="#">This is a link</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {%endblock bodycontent %}
