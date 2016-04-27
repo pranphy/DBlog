@@ -1,7 +1,7 @@
-from django.db import models
 import datetime
 
 from django.utils import timezone
+from django.db import models
 
 class Source(models.Model):
     class Type(models.Model):
@@ -17,12 +17,12 @@ class Source(models.Model):
         return self.name
 
 
-
 class Tag(models.Model):
     tagname = models.CharField(max_length=200,unique=True)
 
     def __str__(self):
         return self.tagname
+
 
 class Vocab(models.Model):
     word = models.CharField(max_length=25,unique=True)
@@ -38,3 +38,20 @@ class Vocab(models.Model):
 
     def __str__(self):
         return self.word
+
+class VcVocab(models.Model):
+    word = models.CharField(max_length=25,unique=True)
+    meaning = models.CharField(max_length=450)
+    short_def = models.TextField()
+    long_def = models.TextField()
+    
+    def __str__(self):
+        return "vc:"+str(self.word)
+    
+
+class VcSentence(models.Model):
+    sentence = models.TextField()
+    url = models.URLField()
+    vocab = models.ForeignKey('VcVocab')
+    def __str__(self):
+        return "vc:"+str(self.sentence)
