@@ -1,17 +1,19 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from django.utils import timezone
+import datetime
+
 from django.views.generic import View
 
+from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import timezone
 
+
+from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 
 from django.template import RequestContext
+from django.template import loader
 
-import datetime
 
 from .models import Tag 
 from .models import BlogPost

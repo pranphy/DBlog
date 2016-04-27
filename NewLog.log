@@ -1,0 +1,177 @@
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is didactic,feminism
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word didactic
+INFO:root:Trying to find the  word didactic exists in local 
+INFO:root: The word didactic exists in local vocab 
+INFO:root: Got word feminism
+INFO:root:Trying to find the  word feminism exists in local 
+INFO:root: info or sentence for : feminism doesnt exist in local 
+INFO:root:Trying to search the word feminism online
+INFO:root: The word feminism is found online 
+INFO:root: I am trying to find sentences online for word feminism
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.theguardian.com/lifeandstyle/2016/apr/25/can-you-be-a-feminist-empowering-dicourse-debate', 'sentence': '“Choice feminism” seems to be a phrase mainly used to caricature young women’s thoughtful feminist organising.'}, {'url': 'http://www.newyorker.com/books/page-turner/should-dictionaries-do-more-to-confront-sexism', 'sentence': 'Rooting out the sexism in dictionaries was a priority for feminism’s second wave.'}, {'url': 'http://www.nytimes.com/2016/04/17/magazine/how-empowerment-became-something-for-women-to-buy.html', 'sentence': 'Twenty years ago, I saw a full-page ad in our local paper headlined: "The New Feminism."'}, {'url': 'http://www.nytimes.com/2016/04/17/fashion/mary-beard-against-internet-trolling.html', 'sentence': '“This is exactly what we need more of in American feminism: wry humor,” Ms. Brown said.'}, {'url': 'http://www.salon.com/2016/04/22/the_world_mourns_prince_everything_you_need_to_know_about_his_life_death_and_international_tributes/', 'sentence': 'The day since Prince’s deathÂ\xa0has been an unending retrospective, profiling the legend’s influence on fashion, identity, feminism, race, and, of course, music.'}]
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is didactic,feminism
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word didactic
+INFO:root:Trying to find the  word didactic exists in local 
+INFO:root: The word didactic exists in local vocab 
+INFO:root: Got word feminism
+INFO:root:Trying to find the  word feminism exists in local 
+INFO:root: The word feminism exists in local vocab 
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is peevish
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word peevish
+INFO:root:Trying to find the  word peevish exists in local 
+INFO:root: The word peevish exists in local vocab 
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is pugnacious
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word pugnacious
+INFO:root:Trying to find the  word pugnacious exists in local 
+INFO:root: info or sentence for : pugnacious doesnt exist in local 
+INFO:root:Trying to search the word pugnacious online
+INFO:root: The word pugnacious is found online 
+INFO:root: I am trying to find sentences online for word pugnacious
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'https://www.washingtonpost.com/local/md-politics/2016/04/26/ad03cdf4-0bbc-11e6-bfa1-4efa856caf2a_story.html', 'sentence': 'Edwards’s defiant tone was emblematic of her pugnacious approach to politics, which has won her ardent supporters but has also alienated some of her colleagues.'}, {'url': 'http://www.wsj.com/articles/the-art-of-larry-gagosians-empire-1461677075', 'sentence': 'Gagosian can be pugnacious, especially on behalf of his artists.'}, {'url': 'http://www.theguardian.com/us-news/2016/apr/26/us-unions-donald-trump-us-election-2016', 'sentence': 'The majority of respondents said they supported the candidate because of his pugnacious personality over rather than for, say, his position on trade.'}, {'url': 'http://www.newyorker.com/magazine/2016/05/02/breakthroughs-in-epigenetics', 'sentence': 'The most mature colonies in Reinberg’s collection belong to a species called the “jumping ant,” a pugnacious social insect from southern India.'}, {'url': 'http://www.nytimes.com/2016/04/21/arts/music/asap-ferg-always-strive-and-prosper.html', 'sentence': 'He is consistently inventive, pugnacious with syllables and prone to break into a husky, not-quite-steady singsong flow.'}]
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is firivilous
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word firivilous
+INFO:root:Trying to find the  word firivilous exists in local 
+INFO:root: info or sentence for : firivilous doesnt exist in local 
+INFO:root:Trying to search the word firivilous online
+INFO:root: There is no such word in internet connection 
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is frivolous
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word frivolous
+INFO:root:Trying to find the  word frivolous exists in local 
+INFO:root: info or sentence for : frivolous doesnt exist in local 
+INFO:root:Trying to search the word frivolous online
+INFO:root: The word frivolous is found online 
+INFO:root: I am trying to find sentences online for word frivolous
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.washingtontimes.com/news/2016/apr/27/police-watchdog-agency-director-withdraws-lawsuit/', 'sentence': 'Emery called the lawsuit frivolous and a distraction from the important work of the agency.'}, {'url': 'http://www.latimes.com/local/lanow/la-me-ln-l-a-judge-rejects-bill-cosby-bid-20160426-story.html', 'sentence': 'Federal Judge Paul Gardephe called the request a "fishing expedition" that bordered on the frivolous.'}, {'url': 'http://www.nytimes.com/2016/04/20/technology/google-android-eu-antitrust.html', 'sentence': 'This commission is just looking to justify their existence and wanting another frivolous payday at the expense of some company or organization.'}, {'url': 'http://www.nytimes.com/politics/first-draft/2016/04/18/republican-consultant-cheri-jacobus-files-libel-suit-against-donald-trump/', 'sentence': '“This is just another frivolous lawsuit and an attempt to gain notoriety at the expense of Donald Trump,” she said.'}, {'url': 'http://www.nytimes.com/2016/04/19/us/politics/donald-trump-central-park-south.html', 'sentence': 'Mr. Rozenholc said the suit, which was dismissed, was entirely frivolous.'}]
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is benign
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word benign
+INFO:root:Trying to find the  word benign exists in local 
+INFO:root: info or sentence for : benign doesnt exist in local 
+INFO:root:Trying to search the word benign online
+INFO:root: The word benign is found online 
+INFO:root: I am trying to find sentences online for word benign
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.theverge.com/2016/4/25/11500388/silicon-valley-hbo-season-3-episode-1-founder-friendly-recap', 'sentence': 'There’s only so many scenes you can shoot in the benign living room of ranch-style Palo Alto home.'}, {'url': 'http://www.nytimes.com/2016/04/26/upshot/avoiding-peanuts-to-avoid-an-allergy-is-a-bad-strategy-for-most.html', 'sentence': 'Without exposure to outside things to fight, our defenses turn inward and toward more benign substances, leading to increased levels of eczema, asthma and allergies.'}, {'url': 'http://www.theguardian.com/film/2016/apr/23/cillian-murphy-peaky-blinders-batman-scarecrow-tom-lamont', 'sentence': 'Knife fights are not infrequent, but it would be an uncharacteristically benign episode of Peaky Blinders were Tommy Shelby to be threatened only with razors.'}, {'url': 'https://www.washingtonpost.com/goingoutguide/movies/louder-than-bombs-a-quiet-yet-resounding-film-about-truth-and-lies/2016/04/21/f0eb92f2-0637-11e6-a12f-ea5aed7958dc_story.html', 'sentence': 'These misdirections aren’t so much malicious as they are examples of benign neglect.'}, {'url': 'http://www.newyorker.com/news/john-cassidy/what-will-bernie-supporters-learn-from-new-york', 'sentence': 'The most benign explanation is that the missing voters were a case of bureaucratic incompetence.'}]
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is serendipity
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word serendipity
+INFO:root:Trying to find the  word serendipity exists in local 
+INFO:root: info or sentence for : serendipity doesnt exist in local 
+INFO:root:Trying to search the word serendipity online
+INFO:root: The word serendipity is found online 
+INFO:root: I am trying to find sentences online for word serendipity
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'https://www.washingtonpost.com/lifestyle/washingtons-owen-danoff-performs-on-his-biggest-stage-yet/2016/04/20/378a66b4-072a-11e6-a12f-ea5aed7958dc_story.html', 'sentence': 'If serendipity — or rather, the suits from Hollywood — hadn’t stepped in, his career might have unspooled in a different direction.'}, {'url': 'http://www.nature.com/news/cocktails-for-cancer-with-a-measure-of-immunotherapy-1.19745', 'sentence': '“There is plenty of opportunity for serendipity now,” says Robert Vonderheide, who studies CD40 at the University of Pennsylvania in Philadelphia.'}, {'url': 'http://www.theguardian.com/music/2016/apr/13/sturgill-simpson-sailors-guide-to-earth-album-release', 'sentence': 'Haggard also died a week before the release of Sturgill Simpson’s A Sailor’s Guide to Earth, another sign of serendipity.'}, {'url': 'http://www.theverge.com/2016/4/12/11412842/first-click-small-i-internet', 'sentence': 'Back in the days of linear TV and printed newspapers, there was a certain serendipity to discovering new things.'}, {'url': 'http://www.nytimes.com/2016/04/09/us/bill-gates-foundation-charity.html', 'sentence': '“I believe this proximity breeds serendipity, and expect that great ideas will continue to emerge from South Lake Union.”'}]
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is sanguine
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word sanguine
+INFO:root:Trying to find the  word sanguine exists in local 
+INFO:root: info or sentence for : sanguine doesnt exist in local 
+INFO:root:Trying to search the word sanguine online
+INFO:root: The word sanguine is found online 
+INFO:root: I am trying to find sentences online for word sanguine
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.washingtontimes.com/news/2016/apr/27/the-latest-kasich-says-cruz-partnership-about-reso/', 'sentence': 'Pennsylvania GOP voters are not quite so sanguine.'}, {'url': 'http://www.wsj.com/articles/anohni-returns-with-her-most-personal-album-yet-1461595678', 'sentence': 'Recently, she has become sanguine about her own place in the world.'}, {'url': 'https://www.washingtonpost.com/news/on-leadership/wp/2016/04/18/what-happened-when-fake-steve-jobs-went-to-work-for-a-real-software-company/', 'sentence': "A: Maybe if I rewrote the whole thing today, I'd be a little more sanguine about some of these things."}, {'url': 'http://www.theverge.com/2016/4/21/11482014/alphabet-q1-first-quarter-earnings-2016', 'sentence': 'Investors seem a little less sanguine, pushing the stock down 4 percent in after-hours trading.'}, {'url': 'http://www.usnews.com/news/articles/2016-04-11/research-better-adult-outcomes-not-test-scores-for-charter-school-students', 'sentence': 'So the sanguine results could just be because "better" students attended the charter schools in the first place.'}]
+INFO:root: Bravoo :: GET 
+INFO:root:Wordlist is not empty 
+INFO:root:Wordlist is chronicle,retaliate,taunt,garner,bait
+INFO:root: ==========================================
+INFO:root: I got a request to this file
+INFO:root: Got word chronicle
+INFO:root:Trying to find the  word chronicle exists in local 
+INFO:root: info or sentence for : chronicle doesnt exist in local 
+INFO:root:Trying to search the word chronicle online
+INFO:root: The word chronicle is found online 
+INFO:root: I am trying to find sentences online for word chronicle
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.nbcnews.com/news/sports/ballad-johnny-football-how-manziel-s-career-cratered-n562636', 'sentence': '“I was a kid who made some goofball decisions,”Â\xa0he told a visiting Houston Chronicle reporter.'}, {'url': 'http://www.reuters.com/article/us-olympics-rio-100days-idUSKCN0XN2CP', 'sentence': '"People are paying no attention" to the Olympics, said longtime Rio resident Julia Michaels, who chronicles the city through her Rio Real blog.'}, {'url': 'http://www.washingtontimes.com/news/2016/apr/25/the-latest-candidates-for-us-senate-meet-for-first/', 'sentence': 'It’s being moderated by hosts from KCRA-TV in Sacramento and The San Francisco Chronicle and will include questions from college students.'}, {'url': 'http://www.nytimes.com/2016/04/26/nyregion/de-blasio-calls-for-improvements-in-election-process-after-problems-in-presidential-primary.html', 'sentence': 'Problems in other elections have also been well chronicled.'}, {'url': 'http://www.latimes.com/entertainment/tv/showtracker/la-et-st-julie-plec-containment-20160419-story.html', 'sentence': 'The CW version of the outbreak-themed drama is set in Atlanta and chronicles an epidemic that has overtaken a city, with its citizens under quarantine.'}]
+INFO:root: Got word retaliate
+INFO:root:Trying to find the  word retaliate exists in local 
+INFO:root: info or sentence for : retaliate doesnt exist in local 
+INFO:root:Trying to search the word retaliate online
+INFO:root: The word retaliate is found online 
+INFO:root: I am trying to find sentences online for word retaliate
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.washingtontimes.com/news/2016/apr/27/police-watchdog-agency-director-withdraws-lawsuit/', 'sentence': 'Her attorney says she can reinstate it if she’s retaliated against or mistreated.'}, {'url': 'http://www.theverge.com/2016/4/25/11501062/us-cyberattack-isis-cyber-command-nsa', 'sentence': 'The Cyber Command had previously focused its efforts on thwarting and retaliating against cyberattacks from Iran, North Korea, China, and Russia.'}, {'url': 'http://www.newyorker.com/magazine/2016/05/02/the-torturing-of-mentally-ill-prisoners', 'sentence': 'There was a pervasive fear that “security staff might retaliate if health staff reported patient abuse.”'}, {'url': 'http://www.latimes.com/sports/ducks/la-sp-ducks-predators-three-keys-20160423-story.html', 'sentence': 'Anaheim didn’t retaliate and got two power plays out of it.'}, {'url': 'https://www.washingtonpost.com/opinions/dont-be-fooled-by-the-new-donald-trump/2016/04/22/aa984b62-082e-11e6-b283-e79d81c63c1b_story.html', 'sentence': 'Remember that Mr. Trump threatened to “spill the beans” on Mr. Cruz’s wife to retaliate for an independent PAC ad that angered him.'}]
+INFO:root: Got word taunt
+INFO:root:Trying to find the  word taunt exists in local 
+INFO:root: info or sentence for : taunt doesnt exist in local 
+INFO:root:Trying to search the word taunt online
+INFO:root: The word taunt is found online 
+INFO:root: I am trying to find sentences online for word taunt
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.latimes.com/sports/clippers/la-sp-clippers-curse-plaschke-20160427-column.html', 'sentence': 'It has stood over their prone bodies and taunted.'}, {'url': 'http://www.washingtontimes.com/news/2016/apr/27/the-latest-kasich-says-cruz-partnership-about-reso/', 'sentence': 'But Cruz referred to the hoop as a “basketball ring,” resulting in a torrent of taunts across social media.'}, {'url': 'http://www.theguardian.com/commentisfree/2016/apr/26/donald-trump-acting-presidential-bullying', 'sentence': 'His victory speech consisted of taunting his former rivals and political pundits about the scale of his five wins on Tuesday.'}, {'url': 'http://www.newyorker.com/magazine/2016/05/02/the-torturing-of-mentally-ill-prisoners', 'sentence': 'In it, she recalls seeing a guard repeatedly taunting an inmate by calling him Tampon, until the inmate flew into a rage.'}, {'url': 'http://www.nytimes.com/2016/04/25/arts/music/review-bryson-tiller-brings-fresh-success-and-tart-sentiments-to-radio-city.html', 'sentence': 'Take this taunt from “Overtime,” a long story condensed into four tart lines:'}]
+INFO:root: Got word garner
+INFO:root:Trying to find the  word garner exists in local 
+INFO:root: info or sentence for : garner doesnt exist in local 
+INFO:root:Trying to search the word garner online
+INFO:root: The word garner is found online 
+INFO:root: I am trying to find sentences online for word garner
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.washingtontimes.com/news/2016/apr/27/colorado-editorial-roundup/', 'sentence': 'The problem with schools using offensive Native American mascots and names is an old one, but it’s garnered new attention.'}, {'url': 'http://www.salon.com/2016/04/27/americas_age_of_decline_partner/', 'sentence': 'And they’ve garnered media coverage, analysis, and commentary almost beyond imagining.Â\xa0'}, {'url': 'http://www.seattletimes.com/news/high-court-weighs-reach-of-bribery-laws-in-mcdonnell-case/', 'sentence': 'Prosecutors said McDonnell usually responded within days of each gift to help garner support for Williams’ supplement.'}, {'url': 'http://www.nytimes.com/2016/04/27/upshot/why-donald-trump-is-probably-two-states-from-victory.html', 'sentence': 'He is likely to garner a healthy share of delegates in those states, whether he wins or not.'}, {'url': 'http://www.usnews.com/news/slideshows/election-results-roundup-connecticut-delaware-maryland-pennsylvania-rhode-island', 'sentence': "As for delegates, Pennsylvania's somewhat quirky system on the GOP side provides an opening for even a primary loser to garner a substantial number."}]
+INFO:root: Got word bait
+INFO:root:Trying to find the  word bait exists in local 
+INFO:root: info or sentence for : bait doesnt exist in local 
+INFO:root:Trying to search the word bait online
+INFO:root: The word bait is found online 
+INFO:root: I am trying to find sentences online for word bait
+INFO:root:type of vcvocab is 
+ <class 'gre.models.VcVocab'> 
+
+INFO:root:[{'url': 'http://www.nytimes.com/2016/04/27/theater/review-tuck-everlasting-a-lyrical-meditation-on-life-death-and-immortality.html', 'sentence': 'The nearest this small-scale production comes to the kind of spectacle we associate with kiddie bait is a toad hopping across the stage.'}, {'url': 'http://time.com/4299527/election-mental-health/', 'sentence': 'News media often sensationalize stories, especially political stories, and bait audiences with hyped-up language to keep them watching or reading.'}, {'url': 'http://www.nytimes.com/2016/04/26/opinion/the-quiet-war-on-corporateaccountability.html', 'sentence': 'Let the whole thing crash and bait outs.'}, {'url': 'http://www.nytimes.com/2016/04/25/sports/football/in-johnny-manziel-a-human-cost-to-the-nfl-draft-machine.html', 'sentence': 'While his name is invoked as a cautionary tale, it is often used as a punch line and as TMZ click bait.'}, {'url': 'http://www.washingtontimes.com/news/2016/apr/24/kids-fishing-clinic-set-saturday-at-valentine-hatc/', 'sentence': 'Participants in the morning will learn about knot-tying, casting, lures and baits, fish identification and water and boating safety.'}]
