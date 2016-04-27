@@ -6,15 +6,15 @@
 {% endcomment %}
 <div class="container">
   {% block searchbar %}
-    <form action="{% url 'gre:test'%}" method="post">
+    <form action="{% url 'gre:test'%}" method="get">
     {% csrf_token %}
     <div class="card" style="background: rgba(255,255,255,0.9)">
        <div class="baack-text">
          <div class="row">
           <div class="input-field col s12">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="id_commenter" maxlength="100" name="commenter" type="text" />
-            <label for="id_commenter">Enter your name:</label>
+            <i class="material-icons prefix">search</i>
+            <input id="id_wordlist"  name="wordlist" type="text" />
+            <label for="id_wordlist">Enter your search words:</label>
           </div><!--col -->
          </div> <!--row -->
        </div>
