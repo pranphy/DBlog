@@ -45,10 +45,15 @@ class VcVocab(models.Model):
     short_def = models.TextField()
     long_def = models.TextField()
     
+    def __str__(self):
+        return "vc:"+str(self.word)
+    
 
 class VcSentence(models.Model):
     sentence = models.TextField()
     url = models.URLField()
     vocab = models.ForeignKey('VcVocab')
+    def __str__(self):
+        return "vc:"+str(self.sentence)
 
 

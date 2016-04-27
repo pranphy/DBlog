@@ -9,6 +9,7 @@ import logging
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.utils import timezone
 from django.views.generic import View
@@ -108,7 +109,8 @@ class TestScrap(View):
             localvocab = VcVocab.objects.get(word=word)
             logging.info(' The word {} is in local vocab'.format(word))
             return localvocab
-        except:
+        except ObjectDoesNotExist as e:
+            logging.info(' Error found {}'.format(str(e)))
             logging.info('The word {} is not in local vocab'.format(word))
             return False
 
@@ -135,24 +137,19 @@ class TestScrap(View):
 
     def get_online_sentences(self,word,vocabobj):
         logging.info(' I am trying to find sentences online for word {}'.format(word))
+        logging.info('type of vcvocab is \n {} \n'.format(type(vocabobj)))
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
         soup = BeautifulSoup(urlopen(url),"lxml")
         jsn = ''
         try:
             jsn = str(soup.select('body p')[0].string)
-        except:
+        except IndexError as e:
             jsn = str(soup)
 
         sent_dict = json.loads(jsn)
         example_list= [] 
         try:
-            try:
-                logging.info('Tyring to save vocab object for word {}'.format(word))
-                vocabobj.save();
-                logging.info(' --- Success ')
-            except:
-                logging.info(' ---------FAILED to save ')
-
+            
             for obj in sent_dict['result']['sentences']:
                 sent_info = {}
                 sent_info['sentence'] = obj['sentence']
@@ -165,12 +162,14 @@ class TestScrap(View):
                 )
                 try:
                     logging.info(' Tryig to save sentences  for {} '.format(word))
-                    VcSentence_obj.save()
-                    logging.info(' ----failed ')
-                except:
-                    logging.info(' ------------------Success ')
-        except:
-            logging.info(' No sentences for word {} found '.foramt(word))
+                    #VcSentence_obj.save()
+                    logging.info(' ---- success')
+                except TypeError as e:
+                    logging.info(' ------------------failed ::TypeError :::'.format(str(e)))
+
+        except KeyError as e:
+            logging.info(' Error found {}'.format(str(e)))
+            logging.info(' No sentences for word {} found '.format(word))
             sent_info = {}
             sent_info['sentence'] = 'Not found'
             sent_info['url'] = "#"
@@ -194,6 +193,13 @@ class TestScrap(View):
                 long_def = longdef
             )
             logging.info(' The word {} is found online '.format(word))
+            logging.info('The found object is \n {} \n '.format(VcVocab_obj))
+
+            try:
+                VcVocab_obj.save()
+                logging.info(' --- Success ')
+            except TypeError as e:
+                logging.info(' ---------FAILED to save: Object not got ::: {}'.format(str(e)))
             return  VcVocab_obj
         except:
             logging.info(' The word {} is not found online '.format(word))
@@ -211,7 +217,7 @@ class TestScrap(View):
             word_info  = {}
             localvocab = self.get_local_vocab(word)
             logging.info(' Returned back from local vocab for word {}'.format(word))
-            if localvocab:
+            if localvocab !=False:
                 logging.info(' word :',word,' exists in local ')
                 word_info['def'] = localvocab['def']
                 word_info['meaning'] = localvocab['meaning']
