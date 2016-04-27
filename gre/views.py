@@ -4,6 +4,7 @@ import requests
 import random
 import datetime
 import json
+import logging
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -22,7 +23,11 @@ from django.template import loader
 
 from .models import Tag 
 from .models import Vocab 
+from .models import VcVocab
+from .models import VcSentence
 
+
+logging.basicConfig(filename="NewLog.log",level=logging.DEBUG)
 
 class GreIndex(View):
     def get(self,request):
@@ -97,10 +102,41 @@ class TestScrap(View):
                 Word.replace('\n','')
                 yield Word
     
+    def get_local_vocab(self,word):
+        try:
+            logging.info(' Testing if the word {} is in local vocab'.format(word))
+            localvocab = VcVocab.objects.get(word=word)
+            logging.info(' The word {} is in local vocab'.format(word))
+            return localvocab
+        except:
+            logging.info('The word {} is not in local vocab'.format(word))
+            return False
 
-    def get_sentences(self,word):
+    def get_local_def(self,localvocab):
+        short_def = localvocab.short_def
+        long_def = localvocab.long_def
+        meaning = localvocab.meaning
+        word_info = {}
+        word_info['def'] = self.WordDefs(short_def,long_def)
+        word_info['meaning'] = meaning
+
+        return word_info
+
+    def get_local_sentences(self,localvocab):
+        sent_obj_list =  VcSentence.objects.get(vocab=localvocab)
+        example_list = []
+        for sentence_obj in sent_obj_list:
+            sent_info = {}
+            sent_info['sentence'] = sentence_obj.sentence
+            sent_info['url'] = sentence_obj.url
+            example_list.append(sent_info)
+
+        return example_list
+
+    def get_online_sentences(self,word,vocabobj):
+        logging.info(' I am trying to find sentences online for word {}'.format(word))
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
-        soup = BeautifulSoup(urlopen(url))
+        soup = BeautifulSoup(urlopen(url),"lxml")
         jsn = ''
         try:
             jsn = str(soup.select('body p')[0].string)
@@ -110,12 +146,31 @@ class TestScrap(View):
         sent_dict = json.loads(jsn)
         example_list= [] 
         try:
+            try:
+                logging.info('Tyring to save vocab object for word {}'.format(word))
+                vocabobj.save();
+                logging.info(' --- Success ')
+            except:
+                logging.info(' ---------FAILED to save ')
+
             for obj in sent_dict['result']['sentences']:
                 sent_info = {}
                 sent_info['sentence'] = obj['sentence']
                 sent_info['url'] = obj['volume']['locator']
                 example_list.append(sent_info)
+                VcSentence_obj = VcSentence(
+                    sentence = obj['sentence'],
+                    url = sent_info['url'],
+                    vocab = vocabobj
+                )
+                try:
+                    logging.info(' Tryig to save sentences  for {} '.format(word))
+                    VcSentence_obj.save()
+                    logging.info(' ----failed ')
+                except:
+                    logging.info(' ------------------Success ')
         except:
+            logging.info(' No sentences for word {} found '.foramt(word))
             sent_info = {}
             sent_info['sentence'] = 'Not found'
             sent_info['url'] = "#"
@@ -124,25 +179,58 @@ class TestScrap(View):
 
         return example_list
 
-    def get_def(self,word):
+    def get_online_vocabobj(self,word):
+        logging.info('Trying to search the word {} online'.format(word))
         url = "http://vocabulary.com/dictionary/"+word
-        soup = BeautifulSoup(urlopen(url))
+        soup = BeautifulSoup(urlopen(url),"lxml")
         try:
+
             shortdef = soup.select('.definitionsContainer .main .section p.short')[0]
             longdef = soup.select('.definitionsContainer .main .section p.long')[0]
-            return self.WordDefs(str(shortdef),str(longdef))
+            VcVocab_obj = VcVocab(
+                word=word,
+                meaning = 'dummy',
+                short_def = shortdef,
+                long_def = longdef
+            )
+            logging.info(' The word {} is found online '.format(word))
+            return  VcVocab_obj
         except:
-            return self.WordDefs('not found','not found')
+            logging.info(' The word {} is not found online '.format(word))
+            return False
 
     def get(self,request):
+        logging.info(" ==========================================")
+        logging.info(" I got a request to this file")
         template = loader.get_template('gre/test.html')
         worddef = {}
         i = 0
         for word in self.allwords():
+            logging.info(' Got word {}'.format(word))
             i += 1
             word_info  = {}
-            word_info['def'] = self.get_def(word)
-            word_info['sentences'] = self.get_sentences(word)
+            localvocab = self.get_local_vocab(word)
+            logging.info(' Returned back from local vocab for word {}'.format(word))
+            if localvocab:
+                logging.info(' word :',word,' exists in local ')
+                word_info['def'] = localvocab['def']
+                word_info['meaning'] = localvocab['meaning']
+                word_info['sentences'] = get_local_sentences(localvocab)
+            else:
+                logging.info(' word : {} doesnt exist in local '.format(word))
+                VcVocab_obj = self.get_online_vocabobj(word)
+                if VcVocab_obj != False:
+                    logging.info(' Fetched the word info for {} from internet '.format(word))
+                    VcSentence_obj = self.get_online_sentences(word,VcVocab_obj)
+
+                    word_info['def'] = self.WordDefs(VcVocab_obj.short_def,VcVocab_obj.long_def)
+                    word_info['meaning'] = VcVocab_obj.meaning
+                    word_info['sentences'] = self.get_online_sentences(word,VcVocab_obj)
+                else:
+                    word_info['def'] = self.WordDefs('Not found','Not Found')
+                    word_info['meaning'] = 'Not found '
+                    word_info['sentences']=[]
+
             worddef[word] =  word_info
 
         context = { 

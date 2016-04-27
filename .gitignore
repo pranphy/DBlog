@@ -9,3 +9,5 @@ staticfiles/
 staticfiles/*
 staticfiles
 *.swp
+*.log
+log/

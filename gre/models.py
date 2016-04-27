@@ -38,3 +38,17 @@ class Vocab(models.Model):
 
     def __str__(self):
         return self.word
+
+class VcVocab(models.Model):
+    word = models.CharField(max_length=25,unique=True)
+    meaning = models.CharField(max_length=450)
+    short_def = models.TextField()
+    long_def = models.TextField()
+    
+
+class VcSentence(models.Model):
+    sentence = models.TextField()
+    url = models.URLField()
+    vocab = models.ForeignKey('VcVocab')
+
+
