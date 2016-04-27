@@ -17,12 +17,12 @@ class Source(models.Model):
         return self.name
 
 
-
 class Tag(models.Model):
     tagname = models.CharField(max_length=200,unique=True)
 
     def __str__(self):
         return self.tagname
+
 
 class Vocab(models.Model):
     word = models.CharField(max_length=25,unique=True)
@@ -55,5 +55,3 @@ class VcSentence(models.Model):
     vocab = models.ForeignKey('VcVocab')
     def __str__(self):
         return "vc:"+str(self.sentence)
-
-
