@@ -7,7 +7,6 @@
 <div class="container">
   {% block searchbar %}
     <form action="{% url 'gre:test'%}" method="get">
-    {% csrf_token %}
     <div class="card" style="background: rgba(255,255,255,0.9)">
        <div class="baack-text">
          <div class="row">
