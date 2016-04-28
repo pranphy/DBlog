@@ -111,7 +111,7 @@ class TestScrap(View):
 
     def fetch_from_list(self,wordlist):
         for word in wordlist.split(','):
-            yield word
+            yield word.strip().lower()
     
 
     def get_local_def(self,localvocab):
