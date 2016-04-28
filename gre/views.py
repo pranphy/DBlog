@@ -143,7 +143,7 @@ class TestScrap(View):
         # See if thre is internet connection 
         try :
             sent_page = urlopen(url)
-            soup = BeautifulSoup(sent_page,"lxml")
+            soup = BeautifulSoup(sent_page)
             jsn = ''
             try:
                 jsn = str(soup.select('body p')[0].string)
@@ -184,7 +184,7 @@ class TestScrap(View):
         try:
             #get vocab info from this page 
             voc_page = urlopen(vocurl)
-            soup = BeautifulSoup(voc_page,"lxml")
+            soup = BeautifulSoup(voc_page)
 
             shortdef = soup.select('.definitionsContainer .main .section p.short')[0]
             longdef = soup.select('.definitionsContainer .main .section p.long')[0]
