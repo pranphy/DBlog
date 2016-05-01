@@ -1,14 +1,15 @@
 {%load staticfiles %}
 {% block navbar %}
-<nav class="blue accent-4 pr-container" role="navigation" >
+<nav class="blue accent-4 pr-container" role="navigation" style="position: fixed; z-index:50;" >
   <div class="nav-wrapper ">
+    <a href="#!" data-activates="pull-menu" class="button-collapse show-on-large" onclick="Materialize.showStaggeredList('#nav-collapse')"><i class="material-icons">menu</i></a>
     <div class="center-align" >
         <a id="logo-container" href="/" class="brand-logo">
-            <img src="{% static 'images/prpr-icon.png'%}" style="height: 35px; width=35px"/>
+            <img src="{% static 'images/prpr-icon.png'%}" style="height: 50px; width=50px;padding-top:15px"/>
         </a>
     </div>
     <div id = "menu-ellipsis" class="right hide-on-large">
-    <a class='dropdown-button' href='#' data-activates='pr-login-dropdown'><i class="material-icons">more_vert</i></a>
+      <a class='dropdown-button' href='#' data-activates='pr-login-dropdown'><i class="material-icons">more_vert</i></a>
       <ul id='pr-login-dropdown' class='dropdown-content'>
         <li><a href="#!">Login</a></li>
         <li><a href="#!">Logout</a></li>
@@ -16,6 +17,10 @@
         <li><a href="#!">Setting</a></li>
       </ul>
     </div>
+  </div>
+</nav>
+<nav class="blue accent-4 pr-container" role="navigation" style="z-index:;" >
+  <div class="nav-wrapper ">
     <div id="pull-menu" class="side-nav">
       {%block menuback%}
       <div class="pr-menu-back teal">
@@ -53,7 +58,6 @@
         </div>
       </div>
     </div> <!-- pull-menu -->
-    <a href="#!" data-activates="pull-menu" class="button-collapse show-on-large" onclick="Materialize.showStaggeredList('#nav-collapse')"><i class="material-icons">menu</i></a>
   </div>
 </nav>
 {%endblock navbar%}

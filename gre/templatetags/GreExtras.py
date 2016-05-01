@@ -12,9 +12,15 @@ def LowerIt(value):
 def get_short_def(info_dict):
     return info_dict['def'].short_def
 
+
 @register.filter(name="get_long_def")
 def get_long_def(info_dict):
     return info_dict['def'].long_def
+
+
+@register.filter(name="get_meaning")
+def get_meaning(info_dict):
+    return info_dict['meaning']
 
 
 @register.filter(name="get_sent_list")
@@ -25,6 +31,7 @@ def get_sent_list(info_dict):
 @register.filter(name="get_sentence")
 def get_sentence(one_sent_dict):
     return one_sent_dict['sentence']
+
 
 @register.filter(name="get_url")
 def get_url(one_sent_dict):

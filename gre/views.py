@@ -1,5 +1,6 @@
 #View for the gre app in my blog
 import os
+import re
 import requests
 import random
 import datetime
@@ -188,9 +189,16 @@ class TestScrap(View):
 
             shortdef = soup.select('.definitionsContainer .main .section p.short')[0]
             longdef = soup.select('.definitionsContainer .main .section p.long')[0]
+
+            #now try to get the meaning
+            filtered = soup.select('.definitions .definition .group .first .definition')[0]
+            formtd = re.sub('\s+',' ',str(filtered.text)).strip()
+            prt_of_speech,mean= formtd.split(' ',1)
+
+
             #logging.info('Type of shortdef is {} and str(shortdef) is {}'.format(type(shortdef),str(shortdef)))
 
-            VcVocab_obj = VcVocab(word=word, meaning = 'dummy', short_def = str(shortdef), long_def = str(longdef))
+            VcVocab_obj = VcVocab(word=word, meaning = str(mean), short_def = str(shortdef), long_def = str(longdef))
             logging.info(' The word {} is found online '.format(word))
             return VcVocab_obj
         except URLError as e:
