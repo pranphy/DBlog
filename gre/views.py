@@ -94,7 +94,8 @@ class GreVcVocab(View):
         for vocab in localvocab:
             word_def = {}
             word_info = {}
-            word_info['def'] =  OrderVocab().WordDefs(vocab.short_def,vocab.long_def)
+            word_info['shortdef'] =  vocab.short_def
+            word_info['longdef'] =  vocab.long_def
             word_info['meaning'] = vocab.meaning
 
             #fetch sentences from loca vocab
@@ -111,40 +112,52 @@ class GreVcVocab(View):
 class GreVcPrint(View):
     def get(self,request):
         template = loader.get_template('gre/allprint.html')
-        def_list = []
+        def_list =  []
+        wordlist = request.GET.get('wordlist')
+        if wordlist:
+            words = wordlist.split(',')
+            if words[0].lower() == 'all':
+                localvocab = VcVocab.objects.all()
+                for vocab in localvocab:
+                    word_def = {}
+                    word_info = {}
+                    word_info['shortdef'] = vocab.short_def
+                    word_info['longdef'] = vocab.long_def
+                    word_info['meaning'] = vocab.meaning
 
-        localvocab = VcVocab.objects.all()
-        for vocab in localvocab:
-            word_def = {}
-            word_info = {}
-            word_info['def'] =  OrderVocab(vocab.word).WordDefs(vocab.short_def,vocab.long_def)
-            word_info['meaning'] = vocab.meaning
+                    #fetch sentences from loca vocab
+                    word_info['sentences'] = OrderVocab(vocab.word).get_local_sentences(vocab)
+                    word_def[vocab.word] = word_info
+                    def_list.append(word_def)
+                #end for
+                random.shuffle(def_list)
+                context = {'deflist':def_list}
+                return HttpResponse(template.render(context, request))
 
-            #fetch sentences from loca vocab
-            word_info['sentences'] = OrderVocab(vocab.word).get_local_sentences(vocab)
-            word_def[vocab.word] = word_info
-            def_list.append(word_def)
-        #end for
-        random.shuffle(def_list)
-        context = {'deflist':def_list}
-        return HttpResponse(template.render(context, request))
+            elif wordlist:
+                for word in OrderVocab().fetch_from_list(wordlist):
+                    worddef = {}
+                    word_info = OrderVocab(word).get_object()
+                    worddef[word] = word_info
+                    def_list.append(worddef)
+            
+                context = {'deflist':def_list}
+                return HttpResponse(template.render(context,request))
+            #inner if close
+        else:
+            response = '''
+            <form method="get" action="/gre/vc/print">
+                <textarea placeholder="Enter your words separated by comma; all for all such words in database"
+                    type="text" style="width:450px; height:200px;" name="wordlist"></textarea>
+                <button type="submit" value="submit">Submit</button>
+            </form>'''
+            return HttpResponse(response)
 
+
+
+
+        
 class OrderVocab():
-    #should be deprecated in near future
-    class WordDefs():
-        short_def = ''
-        long_def = ''
-        def __init__(self,sdef,ldef):
-            self.short_def = sdef
-            self.long_def = ldef
-
-        def set_short_def(self,sdef):
-            self.short_def = sdef
-
-        def set_long_def(self,ldef):
-            self.long_def = ldef
-    #class WordDefs () should be deprecated
-
     def __init__(self,word='dummy'):
         self.word = word
 
@@ -167,7 +180,8 @@ class OrderVocab():
         long_def = localvocab.long_def
         meaning = localvocab.meaning
         word_info = {}
-        word_info['def'] = self.WordDefs(short_def,long_def)
+        word_info['shortdef'] = short_def
+        word_info['longdef'] = long_def
         word_info['meaning'] = meaning
 
         return word_info
@@ -265,7 +279,8 @@ class OrderVocab():
             logging.info('Trying to find the  word {} exists in local '.format(word))
             localvocab = VcVocab.objects.get(word=word)
             logging.info(' The word {} exists in local vocab '.format(word))
-            word_info['def'] =  self.WordDefs(localvocab.short_def,localvocab.long_def)
+            word_info['shortdef'] =  localvocab.short_def
+            word_info['longdef'] =  localvocab.long_def
             word_info['meaning'] = localvocab.meaning
 
             #fetch sentences from loca vocab
@@ -276,9 +291,10 @@ class OrderVocab():
         except ObjectDoesNotExist as e:
             logging.info(' info or sentence for : {} doesnt exist in local '.format(word))
             try:
-                VcVocab_obj = self.get_online_vocab(word)
+                VcVocab_obj = self.get_online_vocab()
 
-                word_info['def'] = self.WordDefs(VcVocab_obj.short_def,VcVocab_obj.long_def)
+                word_info['shortdef'] = VcVocab_obj.short_def
+                word_info['longdef'] = VcVocab_obj.long_def
                 word_info['meaning'] = VcVocab_obj.meaning
 
                 try:
@@ -290,11 +306,13 @@ class OrderVocab():
                     word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
             #Can't fetch vocab object
             except NoInternet:
-                word_info['def'] = self.WordDefs('No internet','NoInternet')
+                word_info['shortdef'] = 'No internet'
+                word_info['longdef'] = 'No internet'
                 word_info['meaning'] = 'No Internet '
                 word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
             except NoWordInInternet:
-                word_info['def'] = self.WordDefs('No word in internet','No word in Internet')
+                word_info['shortdef'] = 'No word in internet'
+                word_info['longdef'] = 'No word in internet'
                 word_info['meaning'] = 'No such word Internet '
                 word_info['sentences'] = [{'sentence':'no such word in internet ','url':'#'}]
             #handled word from internet completely

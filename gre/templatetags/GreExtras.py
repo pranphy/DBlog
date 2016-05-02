@@ -10,12 +10,12 @@ def LowerIt(value):
 
 @register.filter(name="get_short_def")
 def get_short_def(info_dict):
-    return info_dict['def'].short_def
+    return info_dict['shortdef']
 
 
 @register.filter(name="get_long_def")
 def get_long_def(info_dict):
-    return info_dict['def'].long_def
+    return info_dict['longdef']
 
 
 @register.filter(name="get_meaning")
