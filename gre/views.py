@@ -94,11 +94,11 @@ class GreVcVocab(View):
         for vocab in localvocab:
             word_def = {}
             word_info = {}
-            word_info['def'] =  TestScrap().WordDefs(vocab.short_def,vocab.long_def)
+            word_info['def'] =  OrderVocab().WordDefs(vocab.short_def,vocab.long_def)
             word_info['meaning'] = vocab.meaning
 
             #fetch sentences from loca vocab
-            word_info['sentences'] = TestScrap().get_local_sentences(vocab)
+            word_info['sentences'] = OrderVocab(vocab.word).get_local_sentences(vocab)
             word_def[vocab.word] = word_info
             def_list.append(word_def)
 
@@ -117,11 +117,11 @@ class GreVcPrint(View):
         for vocab in localvocab:
             word_def = {}
             word_info = {}
-            word_info['def'] =  TestScrap().WordDefs(vocab.short_def,vocab.long_def)
+            word_info['def'] =  OrderVocab(vocab.word).WordDefs(vocab.short_def,vocab.long_def)
             word_info['meaning'] = vocab.meaning
 
             #fetch sentences from loca vocab
-            word_info['sentences'] = TestScrap().get_local_sentences(vocab)
+            word_info['sentences'] = OrderVocab(vocab.word).get_local_sentences(vocab)
             word_def[vocab.word] = word_info
             def_list.append(word_def)
         #end for
@@ -129,7 +129,7 @@ class GreVcPrint(View):
         context = {'deflist':def_list}
         return HttpResponse(template.render(context, request))
 
-class TestScrap(View):
+class OrderVocab():
     #should be deprecated in near future
     class WordDefs():
         short_def = ''
@@ -144,6 +144,9 @@ class TestScrap(View):
         def set_long_def(self,ldef):
             self.long_def = ldef
     #class WordDefs () should be deprecated
+
+    def __init__(self,word='dummy'):
+        self.word = word
 
 
     def allwords(self):
@@ -222,7 +225,8 @@ class TestScrap(View):
             raise NoInternet
 
         
-    def get_online_vocab(self,word):
+    def get_online_vocab(self):
+        word = self.word
         logging.info('Trying to search the word {} online'.format(word))
         vocurl = "http://vocabulary.com/dictionary/"+word
         # Check if internet connection is online
@@ -252,13 +256,57 @@ class TestScrap(View):
             logging.info(' There is no such word in internet connection ')
             raise NoWordInInternet()
 
+    def get_object(self):
+        word = self.word
+        logging.info(' Got word {}'.format(word))
+        word_info  = {}
+        #Try to find the word out in local Database
+        try:
+            logging.info('Trying to find the  word {} exists in local '.format(word))
+            localvocab = VcVocab.objects.get(word=word)
+            logging.info(' The word {} exists in local vocab '.format(word))
+            word_info['def'] =  self.WordDefs(localvocab.short_def,localvocab.long_def)
+            word_info['meaning'] = localvocab.meaning
+
+            #fetch sentences from loca vocab
+            word_info['sentences'] = self.get_local_sentences(localvocab)
+
+            
+        # If the object is not in local database try to fetch from the internet
+        except ObjectDoesNotExist as e:
+            logging.info(' info or sentence for : {} doesnt exist in local '.format(word))
+            try:
+                VcVocab_obj = self.get_online_vocab(word)
+
+                word_info['def'] = self.WordDefs(VcVocab_obj.short_def,VcVocab_obj.long_def)
+                word_info['meaning'] = VcVocab_obj.meaning
+
+                try:
+                    word_info['sentences'] = self.get_online_sentences(word,VcVocab_obj)
+                    logging.info(word_info['sentences'])
+                except NoSentenceInJson:
+                    word_info['sentences'] = [{'sentence':'no sentence in json','url':'#'}]
+                except NoInternet:
+                    word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
+            #Can't fetch vocab object
+            except NoInternet:
+                word_info['def'] = self.WordDefs('No internet','NoInternet')
+                word_info['meaning'] = 'No Internet '
+                word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
+            except NoWordInInternet:
+                word_info['def'] = self.WordDefs('No word in internet','No word in Internet')
+                word_info['meaning'] = 'No such word Internet '
+                word_info['sentences'] = [{'sentence':'no such word in internet ','url':'#'}]
+            #handled word from internet completely
+        #handeled word from local or internet completely
+        return word_info
+
+class TestScrap(View):
     def get(self,request):
-        logging.info(' Bravoo :: GET ')
         wordlist = request.GET.get('wordlist')
-        word_generator = self.allwords()
+        word_generator = OrderVocab().allwords()
         if wordlist:
-            logging.info('Wordlist is not empty ')
-            word_generator = self.fetch_from_list(wordlist)
+            word_generator = OrderVocab().fetch_from_list(wordlist)
 
         else:
             logging.info('Wordlist is empty ')
@@ -270,58 +318,8 @@ class TestScrap(View):
         worddef = {}
         i = 0
         for word in word_generator: 
-            logging.info(' Got word {}'.format(word))
-            i += 1
-            word_info  = {}
-            
-            #Try to find the word out in local Database
-            try:
-                logging.info('Trying to find the  word {} exists in local '.format(word))
-                localvocab = VcVocab.objects.get(word=word)
-                logging.info(' The word {} exists in local vocab '.format(word))
-                word_info['def'] =  self.WordDefs(localvocab.short_def,localvocab.long_def)
-                word_info['meaning'] = localvocab.meaning
-
-                #fetch sentences from loca vocab
-                word_info['sentences'] = self.get_local_sentences(localvocab)
-
-                
-            # If the object is not in local database try to fetch from the internet
-            except ObjectDoesNotExist as e:
-                logging.info(' info or sentence for : {} doesnt exist in local '.format(word))
-                try:
-                    VcVocab_obj = self.get_online_vocab(word)
-
-                    word_info['def'] = self.WordDefs(VcVocab_obj.short_def,VcVocab_obj.long_def)
-                    word_info['meaning'] = VcVocab_obj.meaning
-
-                    try:
-                        word_info['sentences'] = self.get_online_sentences(word,VcVocab_obj)
-                        logging.info(word_info['sentences'])
-                    except NoSentenceInJson:
-                        word_info['sentences'] = [{'sentence':'no sentence in json','url':'#'}]
-                    except NoInternet:
-                        word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
-                #Can't fetch vocab object
-                except NoInternet:
-                    word_info['def'] = self.WordDefs('No internet','NoInternet')
-                    word_info['meaning'] = 'No Internet '
-                    word_info['sentences'] = [{'sentence':'no internet ','url':'#'}]
-                except NoWordInInternet:
-                    word_info['def'] = self.WordDefs('No word in internet','No word in Internet')
-                    word_info['meaning'] = 'No such word Internet '
-                    word_info['sentences'] = [{'sentence':'no such word in internet ','url':'#'}]
-                #handled word from internet completely
-            #handeled word from local or internet completely
-            worddef[word] =  word_info
-        #endfor interated for each word
-        context = { 
-            'worddef':worddef,
-            'count':i,
-        }
+            word_info = OrderVocab(word).get_object()
+            worddef[word] = word_info
+        
+        context = {'worddef':worddef, 'count':i}
         return HttpResponse(template.render(context,request))
-
-    def post(self,request):
-        wordlist = request.POST.get('wordlist')
-        logging.info('POST::Got words {}'.format(wordlist))
-        return HttpResponseRedirect('/gre/test/')
