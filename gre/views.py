@@ -85,6 +85,50 @@ class GreAllTag(View):
         }
         return HttpResponse(template.render(context, request))
 
+class GreVcVocab(View):
+    def get(self,request):
+        template = loader.get_template('gre/allvcvocab.html')
+        def_list = []
+
+        localvocab = VcVocab.objects.all()
+        for vocab in localvocab:
+            word_def = {}
+            word_info = {}
+            word_info['def'] =  TestScrap().WordDefs(vocab.short_def,vocab.long_def)
+            word_info['meaning'] = vocab.meaning
+
+            #fetch sentences from loca vocab
+            word_info['sentences'] = TestScrap().get_local_sentences(vocab)
+            word_def[vocab.word] = word_info
+            def_list.append(word_def)
+
+        random.shuffle(def_list)
+
+        context = {'deflist':def_list}
+
+        return HttpResponse(template.render(context, request))
+
+class GreVcPrint(View):
+    def get(self,request):
+        template = loader.get_template('gre/allprint.html')
+        def_list = []
+
+        localvocab = VcVocab.objects.all()
+        for vocab in localvocab:
+            word_def = {}
+            word_info = {}
+            word_info['def'] =  TestScrap().WordDefs(vocab.short_def,vocab.long_def)
+            word_info['meaning'] = vocab.meaning
+
+            #fetch sentences from loca vocab
+            word_info['sentences'] = TestScrap().get_local_sentences(vocab)
+            word_def[vocab.word] = word_info
+            def_list.append(word_def)
+        #end for
+        random.shuffle(def_list)
+        context = {'deflist':def_list}
+        return HttpResponse(template.render(context, request))
+
 class TestScrap(View):
     #should be deprecated in near future
     class WordDefs():
@@ -276,8 +320,8 @@ class TestScrap(View):
             'count':i,
         }
         return HttpResponse(template.render(context,request))
+
     def post(self,request):
         wordlist = request.POST.get('wordlist')
         logging.info('POST::Got words {}'.format(wordlist))
         return HttpResponseRedirect('/gre/test/')
-

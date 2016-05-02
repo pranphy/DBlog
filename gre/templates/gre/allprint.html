@@ -1,0 +1,55 @@
+{%load staticfiles %}
+{%load GreExtras %}
+
+<html>
+<head><title> Word power baby!! Word Power!!</title></head>
+<body>
+{% block css%}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/prin/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/prin/layout.css' %}" />
+{%endblock css %}
+    
+{%block bodycontent %}
+<div class = "two-column whole-container">
+{%for worddef in deflist %}
+{% for word,info in worddef.items %}
+<!-- for -->
+        <div class = "word-sentence-longdef-container">
+            <div class = "word-container">
+                <div class = "word-meaning-shortdef">
+                    <div class = "word-meaning clr">
+                        <div class = "word-sn">
+                            <div class = "sn">
+                                {{forloop.parentloop.counter}}.
+                            </div>
+                            <div class = "word">
+                                {{word}}
+                            </div>
+                        </div>
+                        <div class =" mean-shortdef" >
+                            <div class = "meaning">
+                                {{info|get_meaning|safe}}
+                            </div>
+                            <div class = "shortdef">
+                                {{info|get_short_def|safe}}
+                            </div>
+                        </div>
+                    </div>						
+                </div>
+            </div>
+            <div class = "longdef">
+                {{info|get_long_def|safe}}
+            </div>
+            {% for sent in info|get_sent_list|slice:"2" %}
+            <div class = "sentence">
+                {{sent|get_sentence|safe}}
+            </div>
+            {%endfor %}
+        </div>
+<!-- end for -->
+{%endfor %}
+{%endfor %}
+</div>
+{% endblock bodycontent %}
+</body>
+</html>

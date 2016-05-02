@@ -1,0 +1,11 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+.clr:before, .clr:after{
+	content: " ";
+	display: table;
+}
+.clr:after{
+	clear:both;
+}

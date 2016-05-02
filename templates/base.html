@@ -7,10 +7,12 @@
   <title>{%block title %}Imagination | Miles to go before I sleep{%endblock title%}</title>
   <link rel="shortcut icon" type="image/png" href="{%static 'images/favicon.ico'%}">
   <!-- CSS  -->
+  {%block css %}
   <link href="{%static 'css/MaterialFonts.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{%static 'css/materialize.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{%static 'css/style.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="{%static 'css/prettify/prettify.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  {%endblock css%}
 </head>
 <body onload="prettyPrint()">
     {%include "navbar.html" %}

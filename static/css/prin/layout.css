@@ -1,0 +1,99 @@
+p{
+	padding-left: 1px;
+	padding-right: 1px;
+}
+.whole-container{
+	width: 100%;
+}
+
+.word-sentence-longdef-container{
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: 10px;
+}
+.word-container{
+	width: 100%;
+}
+
+.word-meaning-shortdef{
+	width: 100%;
+}
+
+.word-meaning{
+	float : left;
+	/*width: 50%;*/
+}
+
+.word-sn{
+	float : left;
+	width: 20%;
+}
+
+.mean-shortdef {
+    float: right;
+    width: 80%;
+}
+
+.word{
+	float: left;
+	width: 92%;
+	text-align: center;
+}
+
+.sn{
+	float: left;
+	width: 8%;
+}
+
+.meaning{
+	/*float : right;
+	width: 50%;*/
+    text-align: justify;
+}
+
+.shortdef{
+	/*float : right;
+	width: 50%;*/
+    text-align: justify;
+    font-size: 0.6em;
+}
+
+.longdef{
+	clear: both;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	font-style: italic;
+    font-size: 0.75em;
+    text-align: justify;
+}
+
+.sentence{
+	clear: both;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	font-size: 0.8em;
+    text-align: justify;
+}
+
+.word-sentence-longdef-container:nth-of-type(odd) {
+    background: #e0e0e0;
+}
+
+.word-sentence-longdef-container:nth-of-type(even) {
+    background: #fff;
+}
+
+.vc-right .word-sentence-longdef-container:nth-of-type(even) {
+    background: #e0e0e0;
+    padding-left: 2px;
+}
+
+.vc-right .word-sentence-longdef-container:nth-of-type(odd) {
+    background: #fff;
+}
+
+.two-column {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
