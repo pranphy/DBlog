@@ -76,7 +76,7 @@ p{
 }
 
 .word-sentence-longdef-container:nth-of-type(odd) {
-    background: #e0e0e0;
+    background: #efefef;
 }
 
 .word-sentence-longdef-container:nth-of-type(even) {
