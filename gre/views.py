@@ -22,17 +22,11 @@ from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 
-from django.template import RequestContext
-from django.template import loader
+from django.template import RequestContext, loader
 
-from .models import Tag 
-from .models import Vocab 
-from .models import VcVocab
-from .models import VcSentence
+from .models import Tag, Vocab, VcVocab, VcSentence
 
-from .error import NoInternet
-from .error import NoSentenceInJson 
-from .error import NoWordInInternet
+from .error import NoInternet, NoSentenceInJson,NoWordInInternet
 
 
 logging.basicConfig(filename="NewLog.log",level=logging.DEBUG)
