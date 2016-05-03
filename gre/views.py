@@ -135,7 +135,7 @@ class GreVcPrint(View):
                 return HttpResponse(template.render(context, request))
 
             elif wordlist:
-                for word in OrderVocab().fetch_from_list(wordlist):
+                for word in Util().fetch_from_list(wordlist):
                     worddef = {}
                     word_info = OrderVocab(word).get_object()
                     worddef[word] = word_info
@@ -154,14 +154,7 @@ class GreVcPrint(View):
             return HttpResponse(response)
 
 
-
-
-        
-class OrderVocab():
-    def __init__(self,word='dummy'):
-        self.word = word
-
-
+class Util():
     def allwords(self):
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         with open(BASE_DIR+'/gre/static/media/default.txt') as wordlist:
@@ -173,7 +166,11 @@ class OrderVocab():
     def fetch_from_list(self,wordlist):
         for word in wordlist.split(','):
             yield word.strip().lower()
-    
+
+        
+class OrderVocab():
+    def __init__(self,word='dummy'):
+        self.word = word
 
     def get_local_def(self,localvocab):
         short_def = localvocab.short_def
@@ -322,9 +319,9 @@ class OrderVocab():
 class TestScrap(View):
     def get(self,request):
         wordlist = request.GET.get('wordlist')
-        word_generator = OrderVocab().allwords()
+        word_generator = Util().allwords()
         if wordlist:
-            word_generator = OrderVocab().fetch_from_list(wordlist)
+            word_generator = Util().fetch_from_list(wordlist)
 
         else:
             logging.info('Wordlist is empty ')
