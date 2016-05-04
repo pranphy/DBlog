@@ -7,6 +7,8 @@ import datetime
 import json
 import logging
 
+from xhtml2pdf import pisa
+
 from urllib.request import urlopen
 from urllib.error import URLError
 
@@ -22,7 +24,7 @@ from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 
-from django.template import RequestContext, loader
+from django.template import RequestContext,Context, loader
 
 from .models import Tag, Vocab, VcVocab, VcSentence
 
@@ -104,45 +106,62 @@ class GreVcVocab(View):
         return HttpResponse(template.render(context, request))
 
 class GreVcPrint(View):
+    def get_context(self,wordlist,title):
+        words = wordlist.split(',')
+        def_list = []
+        if words[0].lower() == 'all':
+            localvocab = VcVocab.objects.all()
+            for vocab in localvocab:
+                word_def = {}
+                word_info = {}
+                word_info['shortdef'] = vocab.short_def
+                word_info['longdef'] = vocab.long_def
+                word_info['meaning'] = vocab.meaning
+
+                #fetch sentences from loca vocab
+                word_info['sentences'] = OrderVocab(vocab.word).get_local_sentences(vocab)
+                word_def[vocab.word] = word_info
+                def_list.append(word_def)
+            #end for
+            random.shuffle(def_list)
+            context = {'deflist':def_list, 'titulo':title}
+            return context
+        elif wordlist:
+            for word in Util().fetch_from_list(wordlist):
+                worddef = {}
+                word_info = OrderVocab(word).get_object()
+                worddef[word] = word_info
+                def_list.append(worddef)
+        
+            context = {'deflist':def_list,'titulo':title}
+            return context
+        #inner if close
     def get(self,request):
         template = loader.get_template('gre/allprint.html')
         def_list =  []
         wordlist = request.GET.get('wordlist')
+        title = request.GET.get('title')
         if wordlist:
-            words = wordlist.split(',')
-            if words[0].lower() == 'all':
-                localvocab = VcVocab.objects.all()
-                for vocab in localvocab:
-                    word_def = {}
-                    word_info = {}
-                    word_info['shortdef'] = vocab.short_def
-                    word_info['longdef'] = vocab.long_def
-                    word_info['meaning'] = vocab.meaning
+            pdf_flag = request.GET.get('pdf')
+            if pdf_flag == "true":
+                html = template.render(Context(self.get_context(wordlist,title)))
+                file = open('test.pdf', "w+b")
+                pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file, encoding='utf-8')
 
-                    #fetch sentences from loca vocab
-                    word_info['sentences'] = OrderVocab(vocab.word).get_local_sentences(vocab)
-                    word_def[vocab.word] = word_info
-                    def_list.append(word_def)
-                #end for
-                random.shuffle(def_list)
-                context = {'deflist':def_list}
-                return HttpResponse(template.render(context, request))
-
-            elif wordlist:
-                for word in Util().fetch_from_list(wordlist):
-                    worddef = {}
-                    word_info = OrderVocab(word).get_object()
-                    worddef[word] = word_info
-                    def_list.append(worddef)
-            
-                context = {'deflist':def_list}
+                file.seek(0)
+                pdf = file.read()
+                file.close()            
+                return HttpResponse(pdf, 'application/pdf')
+            else:
+                context = self.get_context(wordlist,title)
                 return HttpResponse(template.render(context,request))
-            #inner if close
         else:
             response = '''
             <form method="get" action="/gre/vc/print">
                 <textarea placeholder="Enter your words separated by comma; all for all such words in database"
-                    type="text" style="width:450px; height:200px;" name="wordlist"></textarea>
+                    type="text" style="width:450px; height:200px;" name="wordlist"></textarea><br />
+                <input type="checkbox" value="true" name="pdf">GeneratePDF</input><br />
+                <input type="text" name="title">Enter optional title</title><br/>
                 <button type="submit" value="submit">Submit</button>
             </form>'''
             return HttpResponse(response)
@@ -199,7 +218,7 @@ class OrderVocab():
             soup = BeautifulSoup(sent_page)
             jsn = ''
             try:
-                jsn = str(soup.select('body p')[0].string)
+                jsn = str(soup.select('body')[0].string)
             except IndexError as e:
                 jsn = str(soup)
 
@@ -247,10 +266,7 @@ class OrderVocab():
             filtered = soup.select('.definitions .definition .group .first .definition')[0]
             formtd = re.sub('\s+',' ',str(filtered.text)).strip()
             prt_of_speech,mean= formtd.split(' ',1)
-
-
             #logging.info('Type of shortdef is {} and str(shortdef) is {}'.format(type(shortdef),str(shortdef)))
-
             VcVocab_obj = VcVocab(word=word, meaning = str(mean), short_def = str(shortdef), long_def = str(longdef))
             logging.info(' The word {} is found online '.format(word))
             return VcVocab_obj
@@ -309,6 +325,7 @@ class OrderVocab():
             #handled word from internet completely
         #handeled word from local or internet completely
         return word_info
+
 
 class TestScrap(View):
     def get(self,request):

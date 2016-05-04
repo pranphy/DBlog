@@ -54,4 +54,4 @@ class VcSentence(models.Model):
     url = models.URLField()
     vocab = models.ForeignKey('VcVocab')
     def __str__(self):
-        return "vc:"+str(self.sentence)
+        return str("vc:"+self.vocab.word+'::'+str(self.sentence))[:95]
