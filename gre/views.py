@@ -156,15 +156,9 @@ class GreVcPrint(View):
                 context = self.get_context(wordlist,title)
                 return HttpResponse(template.render(context,request))
         else:
-            response = '''
-            <form method="get" action="/gre/vc/print">
-                <textarea placeholder="Enter your words separated by comma; all for all such words in database"
-                    type="text" style="width:450px; height:200px;" name="wordlist"></textarea><br />
-                <input type="checkbox" value="true" name="pdf">GeneratePDF</input><br />
-                <input type="text" name="title">Enter optional title</title><br/>
-                <button type="submit" value="submit">Submit</button>
-            </form>'''
-            return HttpResponse(response)
+            template = loader.get_template('gre/printform.html')
+            return HttpResponse(template.render({},request))
+
 
 
 class Util():

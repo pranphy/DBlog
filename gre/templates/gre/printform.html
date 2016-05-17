@@ -1,0 +1,27 @@
+{%extends "base.html" %}
+{%load staticfiles %}
+{%block bodycontent %}
+
+<div class="container">
+<div class="row">
+   <div class="col l12 s12 m12">
+     <div class="card">
+       <div class="card-content black-text">
+            <form method="get" action="/gre/vc/print">
+              <textarea placeholder="Enter your words separated by comma; all for all such words in database"
+                  id="id_wordinput" type="text" class="materialize-textarea input-field" name="wordlist"></textarea><br />
+              <br />
+              <input id="id_title" type="text" name="title" class="input-field"><br/>
+              <label for="id_title">Enter optional title</label>
+              <button type="submit" value="submit">Submit</button>
+            </form>
+
+       </div>
+       <div class="card-action">
+         <a href="#">View All</a>
+       </div>
+     </div>
+   </div>
+</div><!--row-->
+</div><!--container -->
+{%endblock bodycontent %}
