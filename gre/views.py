@@ -30,9 +30,10 @@ from .models import Tag, Vocab, VcVocab, VcSentence
 
 from .error import NoInternet, NoSentenceInJson,NoWordInInternet
 
-
-logging.basicConfig(filename="NewLog.log",level=logging.DEBUG)
-
+logging.basicConfig(filename='NewLog.log', level=logging.DEBUG,
+                    format='[%(asctime)s.%(msecs)d] [%(levelname)s] : %(message)s', 
+                    #format='[%(asctime)s.%(msecs)d %(levelname)s] %(module)s - %(funcName)s: %(message)s', 
+                    datefmt="%Y-%m-%d %H:%M:%S")
 class GreIndex(View):
     def get(self,request):
         allword = list(Vocab.objects.all())
@@ -203,7 +204,7 @@ class OrderVocab():
 
     def get_online_sentences(self,word,vocabobj):
         logging.info(' I am trying to find sentences online for word {}'.format(word))
-        logging.info('type of vcvocab is \n {} \n'.format(type(vocabobj)))
+        #logging.info('type of vcvocab is \n {} \n'.format(type(vocabobj)))
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
 
         # See if thre is internet connection 
@@ -300,7 +301,7 @@ class OrderVocab():
 
                 try:
                     word_info['sentences'] = self.get_online_sentences(word,VcVocab_obj)
-                    logging.info(word_info['sentences'])
+                    #logging.info(word_info['sentences'])
                 except NoSentenceInJson:
                     word_info['sentences'] = [{'sentence':'no sentence in json','url':'#'}]
                 except NoInternet:
