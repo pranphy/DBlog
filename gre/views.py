@@ -31,9 +31,10 @@ from .models import Tag, Vocab, VcVocab, VcSentence
 from .error import NoInternet, NoSentenceInJson,NoWordInInternet
 
 logging.basicConfig(filename='NewLog.log', level=logging.DEBUG,
-                    format='[%(asctime)s.%(msecs)d] [%(levelname)s] : %(message)s', 
-                    #format='[%(asctime)s.%(msecs)d %(levelname)s] %(module)s - %(funcName)s: %(message)s', 
+                    format='[%(asctime)s.%(msecs)d] [%(levelname)s] : %(message)s',
+                    #format='[%(asctime)s.%(msecs)d %(levelname)s] %(module)s - %(funcName)s: %(message)s',
                     datefmt="%Y-%m-%d %H:%M:%S")
+
 class GreIndex(View):
     def get(self,request):
         allword = list(Vocab.objects.all())
@@ -49,7 +50,7 @@ class GreIndex(View):
 
 class GreMeaning(View):
     def get(self,request,pword):
-        currentword = get_object_or_404(Vocab,word = pword) 
+        currentword = get_object_or_404(Vocab,word = pword)
         template = loader.get_template('gre/meaning.html')
         context = {
             'pword':pword,
@@ -62,7 +63,7 @@ class GreTag(View):
         tagids = get_list_or_404(Tag,tagname__contains = ptag)
         tagwords = get_list_or_404(Vocab,category__in = tagids)
         template = loader.get_template('gre/tags.html')
-        context = { 
+        context = {
             'tagwords':tagwords,
             'tag' : ptag
         }
@@ -133,7 +134,7 @@ class GreVcPrint(View):
                 word_info = OrderVocab(word).get_object()
                 worddef[word] = word_info
                 def_list.append(worddef)
-        
+
             context = {'deflist':def_list,'titulo':title}
             return context
         #inner if close
@@ -151,7 +152,7 @@ class GreVcPrint(View):
 
                 file.seek(0)
                 pdf = file.read()
-                file.close()            
+                file.close()
                 return HttpResponse(pdf, 'application/pdf')
             else:
                 context = self.get_context(wordlist,title)
@@ -175,7 +176,7 @@ class Util():
         for word in wordlist.split(','):
             yield word.strip().lower()
 
-        
+
 class OrderVocab():
     def __init__(self,word='dummy'):
         self.word = word
@@ -207,7 +208,7 @@ class OrderVocab():
         #logging.info('type of vcvocab is \n {} \n'.format(type(vocabobj)))
         url = "https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=5"
 
-        # See if thre is internet connection 
+        # See if thre is internet connection
         try :
             sent_page = urlopen(url)
             soup = BeautifulSoup(sent_page)
@@ -220,7 +221,7 @@ class OrderVocab():
             sent_dict = json.loads(jsn)
             try:
                 vocabobj.save()
-                example_list= [] 
+                example_list= []
                 for obj in sent_dict['result']['sentences']:
                     sent_info = {}
                     sent_info['sentence'] = obj['sentence']
@@ -243,14 +244,14 @@ class OrderVocab():
         except URLError as e:
             raise NoInternet
 
-        
+
     def get_online_vocab(self):
         word = self.word
         logging.info('Trying to search the word {} online'.format(word))
         vocurl = "http://vocabulary.com/dictionary/"+word
         # Check if internet connection is online
         try:
-            #get vocab info from this page 
+            #get vocab info from this page
             voc_page = urlopen(vocurl)
             soup = BeautifulSoup(voc_page)
 
@@ -288,7 +289,7 @@ class OrderVocab():
             #fetch sentences from loca vocab
             word_info['sentences'] = self.get_local_sentences(localvocab)
 
-            
+
         # If the object is not in local database try to fetch from the internet
         except ObjectDoesNotExist as e:
             logging.info(' info or sentence for : {} doesnt exist in local '.format(word))
@@ -338,9 +339,9 @@ class TestScrap(View):
         template = loader.get_template('gre/test.html')
         worddef = {}
         i = 0
-        for word in word_generator: 
+        for word in word_generator:
             word_info = OrderVocab(word).get_object()
             worddef[word] = word_info
-        
+
         context = {'worddef':worddef, 'count':i}
         return HttpResponse(template.render(context,request))

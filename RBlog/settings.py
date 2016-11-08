@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Blog.apps.BlogConfig', #one has to register apps here
     'gre.apps.GreConfig',
     'study.apps.StudyConfig',
+    'nova.apps.NovaConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^blog/',include('Blog.urls', namespace='blog')),
     url(r'^gre/',include('gre.urls', namespace='gre')),
     url(r'^study/',include('study.urls', namespace='study')),
+    url(r'^nova/',include('nova.urls', namespace='nova')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^',include('Blog.urls', namespace='blog')),
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
