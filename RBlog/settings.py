@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Blog.apps.BlogConfig', #one has to register apps here
+    'blog.apps.BlogConfig', #one has to register apps here
     'gre.apps.GreConfig',
     'study.apps.StudyConfig',
 ]
@@ -64,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(SETTINGS_PATH, 'templates'),
-                 os.path.join(SETTINGS_PATH, 'Blog'),
+                 os.path.join(SETTINGS_PATH, 'blog'),
                  os.path.join(SETTINGS_PATH, 'gre'),
                  os.path.join(SETTINGS_PATH, 'study'),
                  ],
