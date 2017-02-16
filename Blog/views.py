@@ -26,7 +26,7 @@ class BlogIndex(View):
 
     def get(self,request):
         allposts = BlogPost.objects.all()
-        template = loader.get_template('Blog/index.html')
+        template = loader.get_template('blog/index.html')
         Repeat = [1,2]
 
         context   = {
@@ -39,7 +39,7 @@ class BlogDetail(View):
     def get(self,request,pslug):
         currentpost = get_object_or_404(BlogPost,slug=pslug) 
         comments = Comment.objects.filter(blogpost=currentpost)
-        template = loader.get_template('Blog/details.html')
+        template = loader.get_template('blog/details.html')
         form = CommentForm()
         context = {
             'post' : currentpost,
@@ -64,7 +64,7 @@ class BlogDetail(View):
     
 class BlogDownload(View):
     def get(self,request):
-        template = loader.get_template('Blog/download.html')
+        template = loader.get_template('blog/download.html')
         context = {}
         return HttpResponse(template.render(context,request))
 
