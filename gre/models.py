@@ -52,6 +52,6 @@ class VcVocab(models.Model):
 class VcSentence(models.Model):
     sentence = models.TextField()
     url = models.URLField()
-    vocab = models.ForeignKey('VcVocab')
+    vocab = models.ForeignKey('VcVocab',on_delete=models.CASCADE)
     def __str__(self):
         return str("vc:"+self.vocab.word+'::'+str(self.sentence))[:95]

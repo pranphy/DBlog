@@ -24,7 +24,7 @@ class Comment(models.Model):
     commenter = models.CharField(max_length=40)
     comment = models.TextField()
     postdate = models.DateTimeField(auto_now_add=True)
-    blogpost = models.ForeignKey('BlogPost')
+    blogpost = models.ForeignKey('BlogPost',on_delete=models.CASCADE)
 
     def __str__(self):
         return self.commenter+ ' on '+ self.blogpost.title
