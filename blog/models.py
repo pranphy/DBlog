@@ -2,7 +2,6 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-from markdownx.models import MarkdownxField
 
 class Tag(models.Model):
     word = models.CharField(max_length=100,unique=True)
@@ -12,7 +11,7 @@ class Tag(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200,unique=True)
-    body = MarkdownxField() 
+    body =  models.TextField()
     createdate = models.DateTimeField(auto_now_add=True)
     updatedate = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField('Tag',blank=True)
