@@ -1,0 +1,49 @@
+{%extends "base.html" %}
+{%load staticfiles %}
+{%block bodycontent %}
+
+<div class="container">
+{% for tag,vocabs in tagvocab.items %}
+<div class="row">
+    <div class="col l12 s12 m12">
+      <div class="card">
+        <div class="card-content black-text">
+          <div class="row">
+              <div class="col s12 m8 l10">
+                  <span class="card-title teal-text text-darken-3" style="font-size: 2em:text-align:center;">
+                      <a href="{% url 'gre:tag' tag %}">{{tag}}</a>
+                  </span>
+              </div>
+              <div class="col s12 m4  l2">
+                  <span class="blue-text text-darken-2" style="text-align: right;">taged words</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="content" style="text-align: justify; font-size: 1.2em">
+
+            {%for vocab in vocabs.all %}
+            <div class="row">
+                <div class="col s3 m3 l2 green-text text-darken-2"><a href="{% url 'gre:meaning' vocab.word%}">{{vocab.word}}</a></div>
+                <div class="pr-word-meaning col s9 m9 l10">{{vocab.meaning}}</div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="divider"></div>
+          <br/>
+          <div class="chip">
+                <img src="{%static 'images/capital-t.png'%}" alt="Tags">
+                Tags
+          </div><!--chip-->
+          {%for ltag in word.category.all %}
+          <a href="#"><div class="chip blue-text text-lighten-1">{{ltag}}</div></a>
+          {%endfor %}
+        </div>
+        <div class="card-action">
+          <a href="#">View All</a>
+        </div>
+      </div>
+    </div>
+</div><!--row-->
+{% endfor %}
+</div><!--container -->
+{%endblock bodycontent %}
