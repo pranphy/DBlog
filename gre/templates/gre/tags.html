@@ -10,7 +10,7 @@
           <div class="row">
               <div class="col s12 m8 l10">
                   <span class="card-title teal-text text-darken-3" style="font-size: 2em:text-align:center;">
-                      {{tag}} 
+                      {{tag}}
                   </span>
               </div>
               <div class="col s12 m4  l2">
@@ -36,7 +36,9 @@
           </div><!--chip-->
           </a>
           {%for tag in currentword.category.all %}
-          <a href="#"><div class="chip blue-text text-lighten-1">{{tag}}</div></a>
+          <div class="chip blue-text text-lighten-1">
+            <a href="{% url 'gre:tag' tag %}">{{tag}}</a>
+          </div>
           {%endfor %}
         </div>
         <div class="card-action">

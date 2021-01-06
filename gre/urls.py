@@ -2,6 +2,8 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'gre'
+
 urlpatterns = [
     url(r'^$', views.GreIndex.as_view(), name='index'),
     url(r'^meaning/(?P<pword>[a-z]+)$', views.GreMeaning.as_view(), name='meaning'),
