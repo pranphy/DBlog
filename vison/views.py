@@ -21,7 +21,6 @@ from django.utils import timezone
 from django.views.generic import View
 
 from django.shortcuts import render
-from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 

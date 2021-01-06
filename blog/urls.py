@@ -8,4 +8,4 @@ urlpatterns = [
     url(r'^download$',views.BlogDownload.as_view(), name="download"),
 ]
 
-handler404 = 'Blog.views.handler404'
+handler404 = 'blog.views.handler404'

@@ -7,7 +7,7 @@ import datetime
 import json
 import logging
 
-from xhtml2pdf import pisa
+#from xhtml2pdf import pisa
 
 from urllib.request import urlopen
 from urllib.error import URLError
@@ -20,7 +20,6 @@ from django.utils import timezone
 from django.views.generic import View
 
 from django.shortcuts import render
-from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
 
@@ -146,13 +145,14 @@ class GreVcPrint(View):
             pdf_flag = request.GET.get('pdf')
             if pdf_flag == "true":
                 html = template.render(Context(self.get_context(wordlist,title)))
-                file = open('test.pdf', "w+b")
-                pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file, encoding='utf-8')
+                #file = open('test.pdf', "w+b")
+                #pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file, encoding='utf-8')
 
-                file.seek(0)
-                pdf = file.read()
-                file.close()            
-                return HttpResponse(pdf, 'application/pdf')
+                #file.seek(0)
+                #pdf = file.read()
+                #file.close()            
+                #return HttpResponse(pdf, 'application/pdf')
+                return HttpResponse(None, 'application/pdf')
             else:
                 context = self.get_context(wordlist,title)
                 return HttpResponse(template.render(context,request))
