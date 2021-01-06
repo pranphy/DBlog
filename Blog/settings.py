@@ -88,12 +88,15 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+DB_USER = os.environ["BLOG_DB_USER"]
+DB_PASS = os.environ["BLOG_DB_PASS"]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gab_db',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
+        'NAME': 'dj_blog',
+        'USER': DB_USER,
+        'PASSWORD': DB_PASS,
         'HOST': 'localhost',
         'port': '',
     }
@@ -135,7 +138,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = 'staticfiles' 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR,'static'),
