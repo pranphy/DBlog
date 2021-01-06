@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -83,19 +85,23 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DB_USER = os.environ["BLOG_DB_USER"]
-DB_PASS = os.environ["BLOG_DB_PASS"]
+#DB_USER = os.environ["BLOG_DB_USER"]
+#DB_PASS = os.environ["BLOG_DB_PASS"]
+#
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'dj_blog',
+#        'USER': DB_USER,
+#        'PASSWORD': DB_PASS,
+#        'HOST': 'localhost',
+#        'port': '',
+#    }
+#}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dj_blog',
-        'USER': DB_USER,
-        'PASSWORD': DB_PASS,
-        'HOST': 'localhost',
-        'port': '',
-    }
-}
+DATABASES = dict()
+DATABASES["default"] = dj_database_url.config()
+print(DATABASES)
 
 
 # Password validation
